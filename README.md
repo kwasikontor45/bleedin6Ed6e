@@ -1,4 +1,4 @@
-  #---              ..: :..            ---# <br>
+<t>  #---              ..: :..            ---# <br>
 
 i'm just here=>for the chaos ~ and the=>red team exploits <br>
   
@@ -13,4 +13,4 @@ i'm just here=>for the chaos ~ and the=>red team exploits <br>
 	[OK]	 ...	1843_LOVELACE_NOTES_DECRYPTED <br>
 	[OK]	 ...	COMPILER_VERSION_GRACE_HOPPER <br>	
 
-  #---              ..: :..            ---#
+<t>  #---              ..: :..            ---#

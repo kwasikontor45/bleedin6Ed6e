@@ -1,6 +1,7 @@
   #---              ..: :..            ---#
+
+i'm just here=>for the chaos ~ and the=>red team exploits
   
-  [OK]	 ... SPACESHIP_SYSTEMS_NOMINAL
   [OK]   ... BREATHE_TOOL_ACTIVE
   [WARN]  ... HEART_RATE_VARIABILITY_DETECTED 
 
@@ -13,4 +14,3 @@
 	[OK]	 ...	COMPILER_VERSION_GRACE_HOPPER
 
   #---              ..: :..            ---#
-i'm just here=>for the chaos ~ and the=>red team exploits

@@ -5,7 +5,7 @@
   [WARN]  ... HEART_RATE_VARIABILITY_DETECTED <br>
 
   #--- DNA_SYNC_2028 ... ARCHITECT_OF_CHAOS ---# <br>
-☠️--	Sanctuary//		..: 💀 :..	\\InitialPulseEncrypted	--☠️ <br>
+☠️--	Kerberos//		..: 💀 :..	\\InitialPulseEncrypted	--☠️ <br>
 
   [init-1]   ...	LOADING_ADAPTIVE_DNA_PROTOCOL <br>	
 	[OK]	 ...	1843_LOVELACE_NOTES_DECRYPTED <br>

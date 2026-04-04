@@ -1,16 +1,16 @@
-  #---              ..: :..            ---#
+  #---              ..: :..            ---# <br>
 
-i'm just here=>for the chaos ~ and the=>red team exploits
+i'm just here=>for the chaos ~ and the=>red team exploits <br>
   
-  [OK]   ... BREATHE_TOOL_ACTIVE	=>	
-  [WARN]  ... HEART_RATE_VARIABILITY_DETECTED 
+  [OK]   ... BREATHE_TOOL_ACTIVE <br>	
+  [WARN]  ... HEART_RATE_VARIABILITY_DETECTED <br>
 
-  #--- DNA_SYNC_2028 ... ARCHITECT_OF_CHAOS ---#
+  #--- DNA_SYNC_2028 ... ARCHITECT_OF_CHAOS ---# <br>
 
-☠️--Sanctuary//		..: 💀 :..	\\InitialPulseEncrypted--☠️
+☠️--Sanctuary//		..: 💀 :..	\\InitialPulseEncrypted--☠️ <br>
 
-  [INIT]   ...	LOADING ADAPTIVE_DNA PROTOCOL	=>	
-	[OK]	 ...	1843_LOVELACE_NOTES_DECRYPTED	=> <br>
-	[OK]	 ...	COMPILER_VERSION_GRACE_HOPPER	=>	
+  [INIT]   ...	LOADING ADAPTIVE_DNA PROTOCOL <br>	
+	[OK]	 ...	1843_LOVELACE_NOTES_DECRYPTED <br>
+	[OK]	 ...	COMPILER_VERSION_GRACE_HOPPER <br>	
 
   #---              ..: :..            ---#

@@ -11,4 +11,4 @@
 	[OK]	 ...	1843_LOVELACE_NOTES_DECRYPTED <br>
 	[OK]	 ...	COMPILER_VERSION_GRACE_HOPPER <br>	
 
-init-6	<---$--->	init-0    
+init-6	<$---#---$>	init-0    

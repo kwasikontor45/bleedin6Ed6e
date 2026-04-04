@@ -10,7 +10,7 @@ i'm just here=>for the chaos ~ and the=>red team exploits
 ☠️--Sanctuary//		..: 💀 :..	\\InitialPulseEncrypted--☠️
 
   [INIT]   ...	LOADING ADAPTIVE_DNA PROTOCOL	=>	
-	[OK]	 ...	1843_LOVELACE_NOTES_DECRYPTED	=>
+	[OK]	 ...	1843_LOVELACE_NOTES_DECRYPTED	=> <br>
 	[OK]	 ...	COMPILER_VERSION_GRACE_HOPPER	=>	
 
   #---              ..: :..            ---#

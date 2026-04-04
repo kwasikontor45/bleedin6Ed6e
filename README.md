@@ -1,7 +1,7 @@
  ..: >_ :..
 
   [OK]   ... BREATHE_TOOL_ACTIVE <br>
-  [init-3] ... i'm-just-here=>for-the-chaos~and-the-red=>team-exploits <br>
+  [init-3] ... i'm-just-here=>for-the-chaos~and-the-red=>TEAM-exploits <br>
   [WARN]  ... HEART_RATE_VARIABILITY_DETECTED <br>
 
   #--- DnA_SynC_2027 ... ARCHITECT_OF_CHAOS ---# <br>

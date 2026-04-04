@@ -4,8 +4,8 @@
   [init-3] ... i'm-just-here=>for-the-chaos~and-the-red=>team-exploits <br>
   [WARN]  ... HEART_RATE_VARIABILITY_DETECTED <br>
 
-  #--- DNA_SYNC_2027 ... ARCHITECT_OF_CHAOS ---# <br>
-☠️--	Kerberos//		..: 💀 :..	\\InitialPulseEncrypted	--☠️ <br>
+  #--- DnA_SynC_2027 ... ARCHITECT_OF_CHAOS ---# <br>
+☠️--	Bonesaw//		..: 💀 :..	\\InitialPulseCerberus	--☠️ <br>
 
 [OK]	 ...	1843_LOVELACE_NOTES_DECRYPTED <br>
 [init-1]   ...	LOADING_ADAPTIVE_DNA_PROTOCOL <br>

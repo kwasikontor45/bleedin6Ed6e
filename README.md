@@ -1,6 +1,6 @@
- ..: init-0 :..
+ ..: >_ :..
 
-[ >_ ] ... i'm-just-here=>for-the-chaos~and-the=>red-team-exploits <br>
+[init-6] ... i'm-just-here=>for-the-chaos~and-the=>red-team-exploits <br>
   [OK]   ... BREATHE_TOOL_ACTIVE <br>	
   [WARN]  ... HEART_RATE_VARIABILITY_DETECTED <br>
 
@@ -11,4 +11,4 @@
 	[OK]	 ...	1843_LOVELACE_NOTES_DECRYPTED <br>
 	[OK]	 ...	COMPILER_VERSION_GRACE_HOPPER <br>	
 
-..: init-6 :..            
+..: init-0 :..            

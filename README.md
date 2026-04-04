@@ -11,4 +11,4 @@
 [init-1]   ...	LOADING_ADAPTIVE_DNA_PROTOCOL <br>
 [OK]	 ...	COMPILER_VERSION_GRACE_HOPPER <br>	
 
-init-6	<$---#---$>	init-0    
+init-6	~$---_^_---$~	init-0    

@@ -1,6 +1,6 @@
  ..: init-0 :..
 
-[ >_ ] ... i'm-just-here=>for the chaos~and-the=>red-team-exploits <br>
+[ >_ ] ... i'm-just-here=>for-the-chaos~and-the=>red-team-exploits <br>
   [OK]   ... BREATHE_TOOL_ACTIVE <br>	
   [WARN]  ... HEART_RATE_VARIABILITY_DETECTED <br>
 

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -213,20 +212,23 @@
         }
 
         .init-header {
-            font-size: 11px;
+            font-size: 13px;
             color: var(--text-muted);
             letter-spacing: 4px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .init-sequence {
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
-            line-height: 2;
+            line-height: 2.2;
             color: var(--text-secondary);
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .init-line {
@@ -235,14 +237,16 @@
             gap: 12px;
             opacity: 0;
             animation: fadeInLine 0.5s forwards;
+            width: 100%;
+            justify-content: center;
         }
 
         .init-line:nth-child(1) { animation-delay: 0.2s; }
-        .init-line:nth-child(2) { animation-delay: 0.6s; }
-        .init-line:nth-child(3) { animation-delay: 1.0s; }
-        .init-line:nth-child(4) { animation-delay: 1.4s; }
-        .init-line:nth-child(5) { animation-delay: 1.8s; }
-        .init-line:nth-child(6) { animation-delay: 2.2s; }
+        .init-line:nth-child(2) { animation-delay: 0.5s; }
+        .init-line:nth-child(3) { animation-delay: 0.8s; }
+        .init-line:nth-child(4) { animation-delay: 1.1s; }
+        .init-line:nth-child(5) { animation-delay: 1.4s; }
+        .init-line:nth-child(6) { animation-delay: 1.7s; }
 
         @keyframes fadeInLine {
             to { opacity: 1; }
@@ -251,26 +255,28 @@
         .init-status {
             color: var(--accent-gold);
             font-weight: 600;
-            min-width: 60px;
+            min-width: 70px;
+            text-align: right;
         }
 
         .init-status.ok { color: var(--accent-sage); }
         .init-status.warn { color: var(--accent-amber); }
+        .init-status.init { color: var(--text-muted); font-weight: 400; }
 
         .init-dots {
             color: var(--text-muted);
         }
 
-        /* Butterfly DNA Icon */
+        /* Butterfly DNA Icon - Using your image */
         .butterfly-container {
-            margin: 40px auto;
+            margin: 30px auto;
             position: relative;
             display: inline-block;
         }
 
         .butterfly-icon {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             border-radius: 24px;
             background: linear-gradient(135deg, #1a1a2e, #0d1321);
             border: 1px solid var(--border-subtle);
@@ -282,11 +288,11 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
-        .butterfly-icon::before {
-            content: '🦋';
-            font-size: 100px;
-            filter: grayscale(100%) brightness(0.8) sepia(1) hue-rotate(-10deg) saturate(1.5);
-            opacity: 0.9;
+        .butterfly-icon img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            filter: brightness(0.9) contrast(1.1);
         }
 
         .butterfly-glow {
@@ -294,33 +300,26 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(212, 163, 115, 0.3), transparent 70%);
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(212, 163, 115, 0.2), transparent 70%);
             animation: breathe 4s ease-in-out infinite;
+            pointer-events: none;
         }
 
         @keyframes breathe {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+            50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.7; }
         }
 
-        .butterfly-label {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 11px;
-            color: var(--accent-gold);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* DNA Sync Footer */
+        /* DNA Sync Section */
         .dna-sync {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-subtle);
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            text-align: center;
         }
 
         .dna-sync-header {
@@ -330,13 +329,6 @@
             margin-bottom: 15px;
         }
 
-        .dna-sync-sub {
-            font-size: 12px;
-            color: var(--text-secondary);
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
         .dna-pulse {
             font-size: 16px;
             color: var(--accent-gold);
@@ -344,7 +336,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .skull-icon {
@@ -355,6 +348,21 @@
         @keyframes pulse-skull {
             0%, 100% { opacity: 0.5; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Init footer sequence */
+        .init-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+
+        .init-sigil {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 8px;
+            margin-top: 20px;
         }
 
         /* Section divider */
@@ -564,182 +572,6 @@
             color: var(--accent-gold);
         }
 
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            padding: 40px;
-        }
-
-        @media (max-width: 900px) {
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .skill-category {
-            background: rgba(13, 19, 33, 0.4);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: 24px;
-        }
-
-        .skill-title {
-            font-size: 11px;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .skill-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            font-size: 13px;
-        }
-
-        .skill-name {
-            color: var(--text-secondary);
-        }
-
-        .skill-bar {
-            width: 60px;
-            height: 3px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .skill-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-sage));
-            border-radius: 2px;
-        }
-
-        /* Credentials */
-        .credentials-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            padding: 40px;
-        }
-
-        @media (max-width: 900px) {
-            .credentials-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .credential-card {
-            background: rgba(13, 19, 33, 0.6);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: 24px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .credential-card:hover {
-            border-color: var(--border-subtle);
-            transform: translateY(-2px);
-        }
-
-        .credential-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: var(--accent-gold);
-            opacity: 0.5;
-        }
-
-        .credential-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 6px;
-        }
-
-        .credential-org {
-            font-size: 12px;
-            color: var(--accent-sage);
-            margin-bottom: 4px;
-        }
-
-        .credential-date {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        /* Contact */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            padding: 40px;
-        }
-
-        @media (max-width: 900px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 16px;
-            background: rgba(13, 19, 33, 0.4);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-secondary);
-            transition: all 0.3s;
-        }
-
-        .contact-item:hover {
-            border-color: var(--border-subtle);
-            background: rgba(212, 163, 115, 0.05);
-        }
-
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(212, 163, 115, 0.1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .contact-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 2px;
-        }
-
-        .contact-value {
-            font-size: 14px;
-            color: var(--text-primary);
-        }
-
         /* Footer */
         .footer-status {
             background: rgba(0,0,0,0.3);
@@ -775,6 +607,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <div class="scanlines"></div>
@@ -812,61 +645,70 @@
 
         <!-- INIT Sequence Hero -->
         <div class="init-hero">
-            <div class="init-header">..: :..</div>
+            <div class="init-header">..: >_ :..</div>
 
             <div class="init-sequence">
-                <div class="init-line">
-                    <span class="init-status">[INIT]</span>
-                    <span class="init-dots">...</span>
-                    <span>LOADING ADAPTIVE_DNA PROTOCOL</span>
-                </div>
-                <div class="init-line">
-                    <span class="init-status ok">[OK]</span>
-                    <span class="init-dots">...</span>
-                    <span>1843_LOVELACE_NOTES_DECRYPTED</span>
-                </div>
-                <div class="init-line">
-                    <span class="init-status ok">[OK]</span>
-                    <span class="init-dots">...</span>
-                    <span>COMPILER_VERSION_GRACE_HOPPER</span>
-                </div>
-
-                <!-- Butterfly DNA Icon -->
-                <div class="butterfly-container">
-                    <div class="butterfly-icon">
-                        <div class="butterfly-glow"></div>
-                    </div>
-                    <div class="butterfly-label">butterfly-dna</div>
-                </div>
-
-                <div class="init-line">
-                    <span class="init-status ok">[OK]</span>
-                    <span class="init-dots">...</span>
-                    <span>SPACESHIP_SYSTEMS_NOMINAL</span>
-                </div>
                 <div class="init-line">
                     <span class="init-status ok">[OK]</span>
                     <span class="init-dots">...</span>
                     <span>BREATHE_TOOL_ACTIVE</span>
                 </div>
                 <div class="init-line">
+                    <span class="init-status init">[init-3]</span>
+                    <span class="init-dots">...</span>
+                    <span>i'm-just-here=>for-the-chaos~and-the-red=>TEAM-exploits</span>
+                </div>
+                <div class="init-line">
                     <span class="init-status warn">[WARN]</span>
                     <span class="init-dots">...</span>
                     <span>HEART_RATE_VARIABILITY_DETECTED</span>
                 </div>
+
+                <!-- Butterfly DNA Icon - Your Image -->
+                <div class="butterfly-container">
+                    <div class="butterfly-icon">
+                        <div class="butterfly-glow"></div>
+                        <!-- Replace src with your actual butterfly image path -->
+                        <img src="butterfly-dna.png" alt="butterfly-dna" onerror="this.style.display='none'">
+                    </div>
+                </div>
+
+                <div class="init-line">
+                    <span class="init-status ok">[OK]</span>
+                    <span class="init-dots">...</span>
+                    <span>1843_LOVELACE_NOTES_DECRYPTED</span>
+                </div>
+                <div class="init-line">
+                    <span class="init-status init">[init-1]</span>
+                    <span class="init-dots">...</span>
+                    <span>LOADING_ADAPTIVE_DNA_PROTOCOL</span>
+                </div>
+                <div class="init-line">
+                    <span class="init-status ok">[OK]</span>
+                    <span class="init-dots">...</span>
+                    <span>COMPILER_VERSION_GRACE_HOPPER</span>
+                </div>
             </div>
 
-            <!-- DNA Sync Footer -->
+            <!-- DNA Sync Section -->
             <div class="dna-sync">
-                <div class="dna-sync-header">#--- DNA_SYNC_2028 ... ARCHITECT_OF_CHAOS ---#</div>
-                <div class="dna-sync-sub">securing=>signal ~ sampling=>reality ~ bridging=>threshold ~ encoding@memory</div>
+                <div class="dna-sync-header">#--- DnA_SynC_2027 ... ARCHITECT_OF_CHAOS ---#</div>
                 <div class="dna-pulse">
                     <span>☠️</span>
-                    <span>--Sanctuary//</span>
+                    <span>--</span>
+                    <span>Bonesaw//</span>
+                    <span>..:</span>
                     <span class="skull-icon">💀</span>
-                    <span>\InitialPulseEncrypted--</span>
+                    <span>:..</span>
+                    <span>\InitialPulseCerberus</span>
+                    <span>--</span>
                     <span>☠️</span>
                 </div>
+            </div>
+
+            <!-- Init Sigil -->
+            <div class="init-footer">
+                <div class="init-sigil">init-6 ~ ^ ~ init-0</div>
             </div>
         </div>
 

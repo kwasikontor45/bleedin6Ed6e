@@ -7,6 +7,25 @@
     <style>
 
             /* --- NEW ANIMATIONS --- */
+        .verified-link {
+    color: var(--accent-sage) !important;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.verified-link:hover {
+    color: var(--accent-amber) !important;
+    text-shadow: 0 0 8px var(--accent-sage);
+}
+
+/* Subtle "authenticated" checkmark pulse */
+.verified-link::after {
+    content: ' ✓';
+    font-size: 10px;
+    opacity: 0.7;
+    animation: pulse 2s infinite;
+}
 
     /* Breathing Effect for "BREATHING ..: :.." and "BREATHE_TOOL_ACTIVE" */
     @keyframes soft-glow-breath {
@@ -569,11 +588,29 @@
         </div>
     </section>
 <section id="contact" style="padding: 40px;">
-            <div class="info-card" style="max-width: 500px; margin: 0 auto;">
-                <div class="data-row"><span class="data-label">Signal</span><span class="data-value"><a href="mailto:stormdesk57@gmail.com" style="color: var(--accent-gold); text-decoration: none;">stormdesk57@gmail.com</a></span></div>
-                <div class="data-row"><span class="data-label">Source</span><span class="data-value"><a href="https://github.com/kwasikontor45" target="_blank" style="color: var(--accent-gold); text-decoration: none;">github.com/kwasikontor45</a></span></div>
-            </div>
-        </section>
+    <div class="info-card" style="max-width: 500px; margin: 0 auto;">
+        <div class="data-row">
+            <span class="data-label">Signal</span>
+            <span class="data-value">
+                <a href="mailto:stormdesk57@gmail.com" style="color: var(--accent-gold); text-decoration: none;">stormdesk57@gmail.com</a>
+            </span>
+        </div>
+
+        <div class="data-row">
+            <span class="data-label">Credentials</span>
+            <span class="data-value">
+                <a href="https://www.credly.com/users/kwasi-kontor/badges" target="_blank" class="verified-link">CREDLY_VERIFIED</a>
+            </span>
+        </div>
+
+        <div class="data-row">
+            <span class="data-label">Source</span>
+            <span class="data-value">
+                <a href="https://github.com/kwasikontor45" target="_blank" style="color: var(--accent-gold); text-decoration: none;">github.com/kwasikontor45</a>
+            </span>
+        </div>
+    </div>
+</section>
 
         <div class="footer-status">
             <div style="display: flex; align-items: center; gap: 10px;">

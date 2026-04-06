@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KWASI M. KONTOR ~ ARCHITECT OF CHAOS</title>
+    <title>KWASI M. KONTOR ~ THREAT INFORMED DEFENSE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap');
 
@@ -11,23 +11,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        /* --- EMOJI GLITCH EFFECT --- */
-        @keyframes emoji-flicker {
-            0%, 100% { opacity: 1; filter: brightness(100%) saturate(100%); }
-            5% { opacity: 0.4; filter: brightness(200%) saturate(0%); }
-            7% { opacity: 1; }
-            9% { opacity: 0.1; transform: translateX(2px); }
-            10% { opacity: 1; transform: translateX(0); }
-            50% { opacity: 1; }
-            52% { opacity: 0.5; filter: hue-rotate(90deg); }
-            53% { opacity: 1; }
-        }
-
-        .glitch-skull {
-            display: inline-block;
-             animation: emoji-flicker 3s infinite;
         }
 
         :root {
@@ -67,11 +50,28 @@
 
         .glitch-hover:hover {
             animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
-            color: var(--accent-red) !important;
+            color: var(--accent-amber) !important;
             text-shadow: 2px 0 var(--accent-sage), -2px 0 var(--accent-gold);
         }
 
-        /* Scanlines & Noise */
+        /* --- EMOJI GLITCH EFFECT --- */
+        @keyframes emoji-flicker {
+            0%, 100% { opacity: 1; filter: brightness(100%) saturate(100%); }
+            5% { opacity: 0.4; filter: brightness(200%) saturate(0%); }
+            7% { opacity: 1; }
+            9% { opacity: 0.1; transform: translateX(2px); }
+            10% { opacity: 1; transform: translateX(0); }
+            50% { opacity: 1; }
+            52% { opacity: 0.5; filter: hue-rotate(90deg); }
+            53% { opacity: 1; }
+        }
+
+        .glitch-skull {
+            display: inline-block;
+            animation: emoji-flicker 3s infinite;
+        }
+
+        /* Scanlines & Noise overlay */
         .scanlines {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
@@ -102,32 +102,27 @@
         }
 
         .logo::after { content: '_'; animation: blink 1s infinite; }
-
         @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 
         .nav-tabs { display: flex; gap: 0; }
-
         .nav-tab {
             padding: 20px 24px; color: var(--text-secondary); text-decoration: none;
             font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
             border-bottom: 2px solid transparent; transition: all 0.3s;
         }
-
         .nav-tab:hover { color: var(--accent-gold); background: rgba(212, 163, 115, 0.05); }
         .nav-tab.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
 
-        /* IP INTERROGATOR */
         .nav-status {
             font-size: 10px; color: var(--text-muted);
             display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace;
         }
-
         #ip-display { color: var(--accent-amber); font-weight: bold; }
-
         .status-dot {
             width: 6px; height: 6px; background: var(--accent-sage);
             border-radius: 50%; animation: pulse 2s infinite;
         }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         /* Main Window */
         .main-window {
@@ -148,17 +143,15 @@
         .window-dot.red { background: #e07a5f; }
         .window-dot.yellow { background: #f2cc8f; }
         .window-dot.green { background: #81b29a; }
-
         .window-title { font-size: 12px; color: var(--text-secondary); flex: 1; text-align: center; }
 
-        /* INIT Hero */
+        /* Hero / Init Section */
         .init-hero { padding: 60px 40px; text-align: center; position: relative; }
         .init-header { font-size: 11px; color: var(--text-muted); letter-spacing: 4px; margin-bottom: 30px; }
         .init-sequence {
             font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 2;
             color: var(--text-secondary); max-width: 700px; margin: 0 auto; text-align: left;
         }
-
         .init-line { display: flex; align-items: center; gap: 12px; opacity: 0; animation: fadeInLine 0.5s forwards; }
         .init-line:nth-child(1) { animation-delay: 0.2s; }
         .init-line:nth-child(2) { animation-delay: 0.6s; }
@@ -167,7 +160,6 @@
         .init-line:nth-child(6) { animation-delay: 1.8s; }
         .init-line:nth-child(7) { animation-delay: 2.2s; }
         .init-line:nth-child(8) { animation-delay: 2.6s; }
-
         @keyframes fadeInLine { to { opacity: 1; } }
 
         .init-status { color: var(--accent-gold); font-weight: 600; min-width: 60px; }
@@ -175,7 +167,6 @@
         .init-status.warn { color: var(--accent-amber); }
         .init-dots { color: var(--text-muted); }
 
-        /* Butterfly DNA */
         .butterfly-container { margin: 40px auto; position: relative; display: inline-block; }
         .butterfly-icon {
             width: 200px; height: 200px; border-radius: 24px;
@@ -188,8 +179,8 @@
             animation: butterflyFloat 4s ease-in-out infinite;
         }
         @keyframes butterflyFloat { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+        .butterfly-label { text-align: center; font-size: 10px; margin-top: 10px; color: var(--accent-gold); letter-spacing: 2px; }
 
-        /* DNA Sync Footer */
         .dna-sync { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border-subtle); }
         .dna-sync-header { font-size: 14px; color: var(--accent-gold); letter-spacing: 3px; margin-bottom: 10px; }
         .dna-pulse { font-size: 16px; color: var(--accent-gold); display: flex; align-items: center; justify-content: center; gap: 15px; }
@@ -214,7 +205,7 @@
         .data-label { color: var(--text-secondary); }
         .data-value { color: var(--accent-gold); font-weight: 600; }
 
-        /* --- BIOMETRIC HEARTBEAT --- */
+        /* Biometric Heartbeat */
         .heartbeat-svg { width: 50px; height: 20px; stroke: var(--accent-red); fill: none; stroke-width: 2; }
         .heartbeat-path { stroke-dasharray: 100; stroke-dashoffset: 100; animation: heart-flow 2s linear infinite; }
         @keyframes heart-flow { to { stroke-dashoffset: 0; } }
@@ -225,6 +216,12 @@
             padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;
             font-size: 11px; color: var(--text-muted);
         }
+
+        /* Profile & Bio */
+        .profile-section { padding: 0 40px 40px; }
+        .profile-name { font-size: 32px; letter-spacing: 2px; margin-bottom: 10px; }
+        .profile-name span { color: var(--accent-gold); }
+        .profile-bio { color: var(--text-secondary); font-size: 14px; max-width: 800px; }
     </style>
 </head>
 <body>
@@ -255,19 +252,19 @@
                 <div class="window-dot yellow"></div>
                 <div class="window-dot green"></div>
             </div>
-            <div class="window-title glitch-hover">architect_of_chaos.exe</div>
+            <div class="window-title glitch-hover">threat_informed_defense.exe</div>
         </div>
 
         <div class="init-hero">
             <div class="init-header">..: >_ :..</div>
             <div class="init-sequence">
-                <div class="init-line"><span class="init-status ok">[OK]</span><span class="init-dots">...</span><span>BREATHE_TOOL_ACTIVE</span></div>
-                <div class="init-line"><span class="init-status">[init-3]</span><span class="init-dots">...</span><span>i'm-just-here=>for-the-chaos~and-the-red=>TEAM-exploits ..: :..</span></div>
+                <div class="init-line"><span class="init-status ok">[OK]</span><span class="init-dots">...</span><span>BREATHE_TOOL_ACTIVE ..: :..</span></div>
+                <div class="init-line"><span class="init-status">[init-3]</span><span class="init-dots">...</span><span>i'm-just-here=>for-the-chaos~and-the-TACTICAL=>BLUE-intel</span></div>
                 <div class="init-line"><span class="init-status warn">[WARN]</span><span class="init-dots">...</span><span>HEART_RATE_VARIABILITY_DETECTED</span></div>
 
                 <div class="butterfly-container">
                     <div class="butterfly-icon"><img src="butterfly-dna.jpeg" alt="Butterfly DNA" class="butterfly-image"></div>
-                    <div class="butterfly-label" style="text-align: center; font-size: 10px; margin-top: 10px; color: var(--accent-gold);">ADAPTIVE_DNA_PROTOCOL</div>
+                    <div class="butterfly-label">ADAPTIVE_DNA_PROTOCOL</div>
                 </div>
 
                 <div class="init-line"><span class="init-status ok">[OK]</span><span class="init-dots">...</span><span>1843_LOVELACE_NOTES_DECRYPTED</span></div>
@@ -277,29 +274,43 @@
             </div>
 
             <div class="dna-sync">
-                <div class="dna-sync-header">#--- DnA_SynC_2027 ... ARCHITECT_OF_CHAOS ---#</div>
+                <div class="dna-sync-header">#--- DnA_SynC_2027 ... THREAT_INFORMED_DEFENSE ---#</div>
                 <div class="dna-pulse">
                     <span>☠️</span><span class="glitch-hover">-- Bonesaw// ..: 💀 :.. \InitialPulseCerberus --</span><span>☠️</span>
                 </div>
             </div>
         </div>
 
-        <div class="section-divider"><span class="divider-text">// RECON & CAPABILITIES // ..: :..</span></div>
+        <div class="section-divider"><span class="divider-text">// TACTICAL_BLUE & DEFENSIVE_INTEL // ..: :..</span></div>
+
+        <section id="profile" class="profile-section">
+            <h2 class="profile-name">KWASI <span>M. KONTOR</span></h2>
+            <p class="profile-bio">
+                Strategic cybersecurity professional specializing in <strong>threat-informed defense</strong>. Leveraging adversary emulation techniques to harden Security Operations Centers (SOC) and protect critical cloud infrastructure. U.S. Navy Veteran with a background in high-pressure system integrity.
+            </p>
+        </section>
 
         <section id="capabilities">
             <div class="content-grid">
                 <div class="info-card">
-                    <div class="data-row"><span class="data-label">Primary Objective</span><span class="data-value">RED TEAM OPS</span></div>
-                    <div class="data-row"><span class="data-label">Surface Recon</span><span class="data-value">VULN ASSESSMENT</span></div>
-                    <div class="data-row"><span class="data-label">Adaptive Defense</span><span class="data-value">BLUE TEAM SOC</span></div>
-                    <div class="data-row"><span class="data-label">Deployment</span><span class="data-value">AZURE CLOUD</span></div>
+                    <div class="data-row"><span class="data-label">Primary Objective</span><span class="data-value">THREAT-INFORMED DEFENSE</span></div>
+                    <div class="data-row"><span class="data-label">Intelligence Logic</span><span class="data-value">ADVERSARY EMULATION</span></div>
+                    <div class="data-row"><span class="data-label">Active Response</span><span class="data-value">BLUE TEAM SOC</span></div>
+                    <div class="data-row"><span class="data-label">Infrastructure</span><span class="data-value">AZURE / CLOUD NATIVE</span></div>
                 </div>
                 <div class="info-card">
-                    <div class="data-row"><span class="data-label">Tactical Leadership</span><span class="data-value">USN VETERAN</span></div>
+                    <div class="data-row"><span class="data-label">Tactical Leadership</span><span class="data-value">USN VETERAN (E-5)</span></div>
                     <div class="data-row"><span class="data-label">System Integrity</span><span class="data-value">F/A-18 SUPER HORNET</span></div>
                     <div class="data-row"><span class="data-label">Location</span><span class="data-value">LOS ANGELES NODE</span></div>
                     <div class="data-row"><span class="data-label">Status</span><span class="data-value" style="color: var(--accent-sage);">BREATHING ..: :..</span></div>
                 </div>
+            </div>
+        </section>
+
+        <section id="contact" style="padding: 40px;">
+            <div class="info-card" style="max-width: 500px; margin: 0 auto;">
+                <div class="data-row"><span class="data-label">Signal</span><span class="data-value"><a href="mailto:stormdesk57@gmail.com" style="color: var(--accent-gold); text-decoration: none;">stormdesk57@gmail.com</a></span></div>
+                <div class="data-row"><span class="data-label">Source</span><span class="data-value"><a href="https://github.com/kwasikontor45" target="_blank" style="color: var(--accent-gold); text-decoration: none;">github.com/kwasikontor45</a></span></div>
             </div>
         </section>
 
@@ -310,7 +321,7 @@
                 </svg>
                 <span>BIOMETRIC FEED: STABLE ..: :..</span>
             </div>
-            <div><span>KMK // ARCHITECT_OF_CHAOS // 2024</span></div>
+            <div><span>KMK // THREAT_INFORMED_DEFENSE // 2024</span></div>
         </div>
     </div>
 
@@ -325,7 +336,8 @@
                 const data = await response.json();
                 
                 setTimeout(() => {
-                    statusEl.innerHTML = `CAPTURED PACKETS. NOTHING WEIRD, JUST ANALYZING CONNECTION <span class="glitch-skull">💀</span> ..: :.. `;
+                    // Tactical Blue Rephrasing with Glitch Skull and Signature
+                    statusEl.innerHTML = `TARGET ANALYZED. NOTHING WEIRD, JUST VERIFYING CONNECTION <span class="glitch-skull">💀</span> ..: :.. `;
                     ipEl.innerText = `[${data.ip}]`;
                 }, 2000);
             } catch (e) {
@@ -334,12 +346,16 @@
         }
         interrogateIP();
 
-        // Smooth Scroll
+        // Smooth Scroll Logic
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = document.querySelector(tab.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                }
             });
         });
     </script>

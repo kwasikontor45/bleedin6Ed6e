@@ -308,7 +308,7 @@
                 const data = await response.json();
                 
                 setTimeout(() => {
-                    statusEl.innerText = "CAPTURED PACKETS. NOTHING WEIRD, JUST ANALYZING CONNECTION 💀";
+                    statusEl.innerText = "CAPTURED PACKETS. NOTHING WEIRD, JUST ANALYZING CONNECTION 💀 ";
                     ipEl.innerText = `[${data.ip}]`;
                 }, 2000);
             } catch (e) {

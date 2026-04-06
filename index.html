@@ -7,11 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --bg-primary: #0a0e1a;
@@ -38,7 +34,7 @@
             line-height: 1.6;
         }
 
-        /* --- THE GLITCH PROTOCOL --- */
+        /* Effects */
         @keyframes glitch {
             0% { transform: translate(0); }
             20% { transform: translate(-2px, 2px); }
@@ -54,24 +50,26 @@
             text-shadow: 2px 0 var(--accent-sage), -2px 0 var(--accent-gold);
         }
 
-        /* --- EMOJI GLITCH EFFECT --- */
-        @keyframes emoji-flicker {
-            0%, 100% { opacity: 1; filter: brightness(100%) saturate(100%); }
-            5% { opacity: 0.4; filter: brightness(200%) saturate(0%); }
-            7% { opacity: 1; }
-            9% { opacity: 0.1; transform: translateX(2px); }
-            10% { opacity: 1; transform: translateX(0); }
-            50% { opacity: 1; }
-            52% { opacity: 0.5; filter: hue-rotate(90deg); }
-            53% { opacity: 1; }
+        @keyframes pulse-skull {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
         }
 
-        .glitch-skull {
+        .skull-pulse {
             display: inline-block;
-            animation: emoji-flicker 3s infinite;
+            animation: pulse-skull 2s ease-in-out infinite;
         }
 
-        /* Scanlines & Noise overlay */
+        /* Breathing pulse for status */
+        @keyframes breathing-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .breathing-status {
+            animation: breathing-pulse 3s ease-in-out infinite;
+        }
+
         .scanlines {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
@@ -115,7 +113,7 @@
 
         .nav-status {
             font-size: 10px; color: var(--text-muted);
-            display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace;
+            display: flex; align-items: center; gap: 8px;
         }
         #ip-display { color: var(--accent-amber); font-weight: bold; }
         .status-dot {
@@ -145,7 +143,7 @@
         .window-dot.green { background: #81b29a; }
         .window-title { font-size: 12px; color: var(--text-secondary); flex: 1; text-align: center; }
 
-        /* Hero / Init Section */
+        /* Hero */
         .init-hero { padding: 60px 40px; text-align: center; position: relative; }
         .init-header { font-size: 11px; color: var(--text-muted); letter-spacing: 4px; margin-bottom: 30px; }
         .init-sequence {
@@ -202,13 +200,111 @@
         }
 
         .data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+        .data-row:last-child { border-bottom: none; }
         .data-label { color: var(--text-secondary); }
         .data-value { color: var(--accent-gold); font-weight: 600; }
 
-        /* Biometric Heartbeat */
-        .heartbeat-svg { width: 50px; height: 20px; stroke: var(--accent-red); fill: none; stroke-width: 2; }
-        .heartbeat-path { stroke-dasharray: 100; stroke-dashoffset: 100; animation: heart-flow 2s linear infinite; }
-        @keyframes heart-flow { to { stroke-dashoffset: 0; } }
+        /* Profile */
+        .profile-section { padding: 0 40px 40px; }
+        .profile-name { font-size: 32px; letter-spacing: 2px; margin-bottom: 10px; }
+        .profile-name span { color: var(--accent-gold); }
+        .profile-bio { color: var(--text-secondary); font-size: 14px; max-width: 800px; line-height: 1.8; }
+        .profile-bio strong { color: var(--text-primary); font-weight: 600; }
+
+        /* Resume Summary Box */
+        .resume-box {
+            background: rgba(13, 19, 33, 0.4);
+            border: 1px dashed var(--border-subtle);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .resume-box strong { color: var(--accent-gold); }
+
+        /* Timeline */
+        .timeline { padding: 40px; }
+        .timeline-item { position: relative; padding-left: 30px; padding-bottom: 40px; border-left: 1px solid var(--border-subtle); }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -5px; top: 0; width: 9px; height: 9px;
+            background: var(--accent-gold); border-radius: 50%; box-shadow: 0 0 10px rgba(212, 163, 115, 0.5);
+        }
+        .timeline-item:last-child { border-left: 1px solid transparent; }
+        .timeline-date { font-size: 11px; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .timeline-title { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .timeline-org { font-size: 12px; color: var(--accent-sage); margin-bottom: 12px; }
+        .timeline-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+        .timeline-desc ul { list-style: none; padding: 0; }
+        .timeline-desc li { padding: 4px 0; padding-left: 16px; position: relative; }
+        .timeline-desc li::before { content: '>'; position: absolute; left: 0; color: var(--accent-gold); }
+
+        /* Projects */
+        .projects-section { padding: 40px; }
+        .project-card {
+            background: rgba(13, 19, 33, 0.6); border: 1px solid var(--border-subtle);
+            border-radius: 8px; padding: 30px; margin-bottom: 30px; position: relative;
+        }
+        .project-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+            background: linear-gradient(to bottom, var(--accent-gold), var(--accent-sage));
+        }
+        .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+        .project-title { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+        .project-subtitle { font-size: 12px; color: var(--accent-sage); letter-spacing: 1px; }
+        .project-status {
+            font-size: 11px; padding: 6px 12px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .project-status.active { background: rgba(135, 168, 120, 0.2); color: var(--accent-sage); }
+        .project-status.development { background: rgba(242, 204, 143, 0.2); color: var(--accent-amber); }
+        .project-description { color: var(--text-secondary); font-size: 14px; line-height: 1.8; margin-bottom: 20px; }
+        .project-description strong { color: var(--text-primary); }
+        .project-tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .tech-tag {
+            font-size: 11px; padding: 4px 10px; background: rgba(212, 163, 115, 0.1);
+            border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--accent-gold);
+        }
+        .project-achievements { list-style: none; padding: 0; }
+        .project-achievements li { padding: 8px 0; padding-left: 20px; position: relative; font-size: 13px; color: var(--text-secondary); }
+        .project-achievements li::before { content: '◆'; position: absolute; left: 0; color: var(--accent-gold); font-size: 10px; }
+
+        /* Skills */
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 40px; }
+        @media (max-width: 900px) { .skills-grid { grid-template-columns: 1fr; } }
+        .skill-category { background: rgba(13, 19, 33, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 24px; }
+        .skill-title { font-size: 11px; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border-subtle); }
+        .skill-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 13px; }
+        .skill-name { color: var(--text-secondary); }
+        .skill-bar { width: 60px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+        .skill-fill { height: 100%; background: linear-gradient(90deg, var(--accent-gold), var(--accent-sage)); border-radius: 2px; }
+
+        /* Credentials */
+        .credentials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 40px; }
+        @media (max-width: 900px) { .credentials-grid { grid-template-columns: 1fr; } }
+        .credential-card {
+            background: rgba(13, 19, 33, 0.6); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px; padding: 24px; transition: all 0.3s; position: relative;
+        }
+        .credential-card:hover { border-color: var(--border-subtle); transform: translateY(-2px); }
+        .credential-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent-gold); opacity: 0.5; }
+        .credential-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+        .credential-org { font-size: 12px; color: var(--accent-sage); margin-bottom: 4px; }
+        .credential-date { font-size: 11px; color: var(--text-muted); }
+
+        /* Contact */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 40px; }
+        @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+        .contact-links { display: flex; flex-direction: column; gap: 16px; }
+        .contact-item {
+            display: flex; align-items: center; gap: 16px; padding: 16px;
+            background: rgba(13, 19, 33, 0.4); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px; text-decoration: none; color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+        .contact-item:hover { border-color: var(--border-subtle); background: rgba(212, 163, 115, 0.05); }
+        .contact-icon { width: 40px; height: 40px; background: rgba(212, 163, 115, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .contact-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+        .contact-value { font-size: 14px; color: var(--text-primary); }
 
         /* Footer */
         .footer-status {
@@ -217,12 +313,17 @@
             font-size: 11px; color: var(--text-muted);
         }
 
-        /* Profile & Bio */
-        .profile-section { padding: 0 40px 40px; }
-        .profile-name { font-size: 32px; letter-spacing: 2px; margin-bottom: 10px; }
-        .profile-name span { color: var(--accent-gold); }
-        .profile-bio { color: var(--text-secondary); font-size: 14px; max-width: 800px; }
+        .heartbeat-svg { width: 50px; height: 20px; stroke: var(--accent-red); fill: none; stroke-width: 2; }
+        .heartbeat-path { stroke-dasharray: 100; stroke-dashoffset: 100; animation: heart-flow 2s linear infinite; }
+        @keyframes heart-flow { to { stroke-dashoffset: 0; } }
+
+        /* Fade in */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        section[id] { scroll-margin-top: 80px; }
     </style>
+<base target="_blank">
 </head>
 <body>
     <div class="scanlines"></div>
@@ -230,11 +331,13 @@
 
     <nav class="nav-container">
         <div class="nav-inner">
-            <a href="#" class="logo glitch-hover">KM.K ..: >_ :..</a>
+            <a href="#" class="logo glitch-hover">KM.K</a>
             <div class="nav-tabs">
                 <a href="#profile" class="nav-tab active">Profile</a>
+                <a href="#service" class="nav-tab">Service</a>
                 <a href="#capabilities" class="nav-tab">Capabilities</a>
                 <a href="#projects" class="nav-tab">Projects</a>
+                <a href="#credentials" class="nav-tab">Credentials</a>
                 <a href="#contact" class="nav-tab">Contact</a>
             </div>
             <div class="nav-status">
@@ -258,7 +361,7 @@
         <div class="init-hero">
             <div class="init-header">..: >_ :..</div>
             <div class="init-sequence">
-                <div class="init-line"><span class="init-status ok">[OK]</span><span class="init-dots">...</span><span>BREATHE_TOOL_ACTIVE ..: :..</span></div>
+                <div class="init-line"><span class="init-status ok">[OK]</span><span class="init-dots">...</span><span>BREATHE_TOOL_ACTIVE</span></div>
                 <div class="init-line"><span class="init-status">[init-3]</span><span class="init-dots">...</span><span>i'm-just-here=>for-the-chaos~and-the-TACTICAL=>BLUE-intel</span></div>
                 <div class="init-line"><span class="init-status warn">[WARN]</span><span class="init-dots">...</span><span>HEART_RATE_VARIABILITY_DETECTED</span></div>
 
@@ -276,41 +379,201 @@
             <div class="dna-sync">
                 <div class="dna-sync-header">#--- DnA_SynC_2027 ... THREAT_INFORMED_DEFENSE ---#</div>
                 <div class="dna-pulse">
-                    <span>☠️</span><span class="glitch-hover">-- Bonesaw// ..: 💀 :.. \InitialPulseCerberus --</span><span>☠️</span>
+                    <span class="skull-pulse">☠️</span>
+                    <span class="glitch-hover">-- Bonesaw// ..: 💀 :.. \InitialPulseCerberus --</span>
+                    <span class="skull-pulse">☠️</span>
                 </div>
             </div>
         </div>
 
-        <div class="section-divider"><span class="divider-text">// TACTICAL_BLUE & DEFENSIVE_INTEL // ..: :..</span></div>
+        <div class="section-divider"><span class="divider-text">// TACTICAL_BLUE & DEFENSIVE_INTEL //</span></div>
 
         <section id="profile" class="profile-section">
             <h2 class="profile-name">KWASI <span>M. KONTOR</span></h2>
             <p class="profile-bio">
-                Strategic cybersecurity professional specializing in <strong>threat-informed defense</strong>. Leveraging adversary emulation techniques to harden Security Operations Centers (SOC) and protect critical cloud infrastructure. U.S. Navy Veteran with a background in high-pressure system integrity.
+                Strategic cybersecurity professional specializing in <strong>threat-informed defense</strong> and adversary emulation. U.S. Navy Veteran with 5 years maintaining F/A-18E/F Super Hornet systems in high-pressure operational environments. Currently pursuing a <strong>Bachelor of Science in Cybersecurity</strong> at University of Phoenix (expected October 2028), building hands-on SOC capabilities through self-directed labs and cloud-native security projects.
             </p>
+
+            <div class="resume-box">
+                <strong>RESUME //</strong> Traditional resume available with detailed work history including technical support at Staples (2015-2016), service clerk at Giant Food Store (2014-2015), and comprehensive military service record. <strong>Contact for full CV.</strong>
+            </div>
         </section>
 
-        <section id="capabilities">
-            <div class="content-grid">
-                <div class="info-card">
-                    <div class="data-row"><span class="data-label">Primary Objective</span><span class="data-value">THREAT-INFORMED DEFENSE</span></div>
-                    <div class="data-row"><span class="data-label">Intelligence Logic</span><span class="data-value">ADVERSARY EMULATION</span></div>
-                    <div class="data-row"><span class="data-label">Active Response</span><span class="data-value">BLUE TEAM SOC</span></div>
-                    <div class="data-row"><span class="data-label">Infrastructure</span><span class="data-value">AZURE / CLOUD NATIVE</span></div>
+        <section id="service">
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">2017 - 2022 • USN • NAS Lemoore, CA</div>
+                    <div class="timeline-title">Aviation Machinist's Mate — Petty Officer Second Class (E-5)</div>
+                    <div class="timeline-org">F/A-18E/F Super Hornet Squadron</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Qualified <strong>Enlisted Aviation Warfare Specialist (EAWS)</strong></li>
+                            <li>Awarded <strong>Navy and Marine Corps Achievement Medal</strong></li>
+                            <li>Supervised and trained <strong>10+ personnel</strong> in aircraft maintenance</li>
+                            <li>Managed engine replacement, fuel system maintenance, and QA operations</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="info-card">
-                    <div class="data-row"><span class="data-label">Tactical Leadership</span><span class="data-value">USN VETERAN</span></div>
-                    <div class="data-row"><span class="data-label">System Integrity</span><span class="data-value">F/A-18 SUPER HORNET</span></div>
-                    <div class="data-row"><span class="data-label">Location</span><span class="data-value">LOS ANGELES NODE</span></div>
-                    <div class="data-row"><span class="data-label">Status</span><span class="data-value" style="color: var(--accent-sage);">BREATHING ..: :..</span></div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-date">2015 - 2016 • Part-Time</div>
+                    <div class="timeline-title">Technical Solutions Associate</div>
+                    <div class="timeline-org">Staples, Inc. • Alexandria, VA</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Subject Matter Expert for hardware/software installation and troubleshooting</li>
+                            <li>Resolved customer service tickets and delivered technical support</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" style="padding: 40px;">
-            <div class="info-card" style="max-width: 500px; margin: 0 auto;">
-                <div class="data-row"><span class="data-label">Signal</span><span class="data-value"><a href="mailto:stormdesk57@gmail.com" style="color: var(--accent-gold); text-decoration: none;">stormdesk57@gmail.com</a></span></div>
-                <div class="data-row"><span class="data-label">Source</span><span class="data-value"><a href="https://github.com/kwasikontor45" target="_blank" style="color: var(--accent-gold); text-decoration: none;">github.com/kwasikontor45</a></span></div>
+        <div class="section-divider"><span class="divider-text">// Technical Capabilities</span></div>
+
+        <section id="capabilities">
+            <div class="skills-grid">
+                <div class="skill-category fade-in">
+                    <div class="skill-title">Cybersecurity</div>
+                    <div class="skill-item"><span class="skill-name">Vulnerability Assessment</span><div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div></div>
+                    <div class="skill-item"><span class="skill-name">SIEM / Splunk</span><div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div></div>
+                    <div class="skill-item"><span class="skill-name">Cloud Security</span><div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div></div>
+                    <div class="skill-item"><span class="skill-name">Threat Detection</span><div class="skill-bar"><div class="skill-fill" style="width: 70%"></div></div></div>
+                </div>
+                <div class="skill-category fade-in">
+                    <div class="skill-title">Infrastructure</div>
+                    <div class="skill-item"><span class="skill-name">Azure Cloud</span><div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div></div>
+                    <div class="skill-item"><span class="skill-name">Network Config</span><div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div></div>
+                    <div class="skill-item"><span class="skill-name">VPN Implementation</span><div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div></div>
+                    <div class="skill-item"><span class="skill-name">Linux/Windows Server</span><div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div></div>
+                </div>
+                <div class="skill-category fade-in">
+                    <div class="skill-title">Development</div>
+                    <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div></div>
+                    <div class="skill-item"><span class="skill-name">React Native / Expo</span><div class="skill-bar"><div class="skill-fill" style="width: 70%"></div></div></div>
+                    <div class="skill-item"><span class="skill-name">Git/GitHub</span><div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div></div>
+                    <div class="skill-item"><span class="skill-name">Technical Docs</span><div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><span class="divider-text">// Projects & Labs</span></div>
+
+        <section id="projects">
+            <div class="projects-section">
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Blue Team SOC Home Lab</div>
+                            <div class="project-subtitle">Cloud-Native Security Operations Center</div>
+                        </div>
+                        <span class="project-status active">ACTIVE</span>
+                    </div>
+                    <div class="project-tech-stack">
+                        <span class="tech-tag">Splunk Cloud</span>
+                        <span class="tech-tag">Azure</span>
+                        <span class="tech-tag">Sysmon</span>
+                        <span class="tech-tag">Ubuntu Honeypot</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                    <ul class="project-achievements">
+                        <li>Built cloud-native SOC processing real security events daily</li>
+                        <li>Deployed Ubuntu honeypot and Windows Server 2022 with Sysmon in Azure</li>
+                        <li>Developed 9 detection rules for DNS tunneling, brute force, credential dumping</li>
+                        <li>Automated data pipeline with Splunk Universal Forwarder over SSL</li>
+                    </ul>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Kataleya</div>
+                            <div class="project-subtitle">Privacy-First Recovery Support Mobile App</div>
+                        </div>
+                        <span class="project-status development">IN DEVELOPMENT</span>
+                    </div>
+                    <div class="project-tech-stack">
+                        <span class="tech-tag">React Native</span>
+                        <span class="tech-tag">Expo SDK 54</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">X25519 Encryption</span>
+                        <span class="tech-tag">SQLite</span>
+                    </div>
+                    <div class="project-description">
+                        A private sanctuary for recovery — featuring three-vault privacy architecture (Surface/Sanctuary/Fortress), end-to-end encrypted sponsor messaging, and circadian-aware UI that adapts to user state without notifications or intrusion.
+                    </div>
+                    <ul class="project-achievements">
+                        <li>Hardware-backed key storage with AES-256 encrypted backups</li>
+                        <li>Zero-knowledge architecture — health data never leaves device</li>
+                        <li>State engine reads body/mind/soul signals to quietly shift UI</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><span class="divider-text">// Education & Certifications</span></div>
+
+        <section id="credentials">
+            <div class="credentials-grid">
+                <div class="credential-card fade-in">
+                    <div class="credential-title">BS Cybersecurity</div>
+                    <div class="credential-org">University of Phoenix</div>
+                    <div class="credential-date">Expected: October 2028</div>
+                </div>
+                <div class="credential-card fade-in">
+                    <div class="credential-title">Certificate — Information Technology Plus</div>
+                    <div class="credential-org">Cerro Coso Community College</div>
+                    <div class="credential-date">December 2023</div>
+                </div>
+                <div class="credential-card fade-in">
+                    <div class="credential-title">Security Guard License</div>
+                    <div class="credential-org">BSIS License #6877683</div>
+                    <div class="credential-date">Expires: November 30, 2027</div>
+                </div>
+                <div class="credential-card fade-in">
+                    <div class="credential-title">Verizon Cloud Platform Simulation</div>
+                    <div class="credential-org">Forage</div>
+                    <div class="credential-date">October 2024</div>
+                </div>
+                <div class="credential-card fade-in">
+                    <div class="credential-title">Navy and Marine Corps Achievement Medal</div>
+                    <div class="credential-org">United States Navy</div>
+                    <div class="credential-date">Exceptional Professional Achievement</div>
+                </div>
+                <div class="credential-card fade-in">
+                    <div class="credential-title">Microsoft Word for Career Success</div>
+                    <div class="credential-org">TELACU Veterans Upward Bound</div>
+                    <div class="credential-date">December 2025</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><span class="divider-text">// Establish Connection</span></div>
+
+        <section id="contact">
+            <div class="contact-grid">
+                <div class="contact-links fade-in">
+                    <a href="mailto:stormdesk57@gmail.com" class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div><div class="contact-label">Primary Email</div><div class="contact-value">stormdesk57@gmail.com</div></div>
+                    </a>
+                    <a href="mailto:autopsy@protonmail.com" class="contact-item">
+                        <div class="contact-icon">🔒</div>
+                        <div><div class="contact-label">Secure Email</div><div class="contact-value">autopsy@protonmail.com</div></div>
+                    </a>
+                    <a href="https://github.com/kwasikontor45" target="_blank" class="contact-item">
+                        <div class="contact-icon">💻</div>
+                        <div><div class="contact-label">GitHub</div><div class="contact-value">github.com/kwasikontor45</div></div>
+                    </a>
+                    <a href="https://www.credly.com/users/kwasi-kontor" target="_blank" class="contact-item">
+                        <div class="contact-icon">🏆</div>
+                        <div><div class="contact-label">Credly</div><div class="contact-value">Digital Credentials</div></div>
+                    </a>
+                </div>
+                <div class="info-card fade-in">
+                    <div class="data-row"><span class="data-label">Location</span><span class="data-value">Los Angeles, CA 90025</span></div>
+                    <div class="data-row"><span class="data-label">Status</span><span class="data-value breathing-status" style="color: var(--accent-sage);">BREATHING <span class="breathing-status">..: :..</span></span></div>
+                    <div class="data-row"><span class="data-label">Warfare Qual</span><span class="data-value">EAWS (Enlisted)</span></div>
+                </div>
             </div>
         </section>
 
@@ -319,34 +582,31 @@
                 <svg class="heartbeat-svg" viewBox="0 0 50 20">
                     <path class="heartbeat-path" d="M0,10 L10,10 L12,5 L15,15 L18,10 L50,10" />
                 </svg>
-                <span>BIOMETRIC FEED: STABLE ..: :..</span>
+                <span>BIOMETRIC FEED: STABLE</span>
             </div>
             <div><span>KMK // THREAT_INFORMED_DEFENSE // 2024</span></div>
         </div>
     </div>
 
     <script>
-        // IP INTERROGATOR SCRIPT
+        // IP Interrogator
         async function interrogateIP() {
             const statusEl = document.getElementById('connection-status');
             const ipEl = document.getElementById('ip-display');
-            
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
                 const data = await response.json();
-                
                 setTimeout(() => {
-                    // Tactical Blue Rephrasing with Glitch Skull and Signature
-                    statusEl.innerHTML = `TARGET ANALYZED. NOTHING WEIRD, JUST VERIFYING CONNECTION <span class="glitch-skull">💀</span> ..: :.. `;
+                    statusEl.innerHTML = 'TARGET ANALYZED <span class="skull-pulse">💀</span>';
                     ipEl.innerText = `[${data.ip}]`;
                 }, 2000);
             } catch (e) {
-                statusEl.innerText = "STEALTH PROTOCOL ACTIVE ..: :..";
+                statusEl.innerText = "STEALTH PROTOCOL ACTIVE";
             }
         }
         interrogateIP();
 
-        // Smooth Scroll Logic
+        // Smooth scroll
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -358,6 +618,15 @@
                 }
             });
         });
+
+        // Fade in on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>

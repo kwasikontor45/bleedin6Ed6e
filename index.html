@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KWASI M. KONTOR ~ IT & SECURITY</title>
+    <title>KWASI M. KONTOR ~ ARCHITECT OF CHAOS</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap');
 
@@ -20,11 +20,14 @@
             --accent-gold: #d4a373;
             --accent-amber: #f2cc8f;
             --accent-sage: #87a878;
+            --accent-red: #e07a5f;
             --text-primary: #e8e8e8;
             --text-secondary: #6b7280;
             --text-muted: #4b5563;
             --border-subtle: rgba(212, 163, 115, 0.2);
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'JetBrains Mono', monospace;
@@ -35,811 +38,291 @@
             line-height: 1.6;
         }
 
-        /* Scanline overlay */
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(255,255,255,0),
-                rgba(255,255,255,0) 50%,
-                rgba(0,0,0,0.1) 50%,
-                rgba(0,0,0,0.1)
-            );
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 1000;
-            opacity: 0.3;
+        /* --- THE GLITCH PROTOCOL --- */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
 
-        /* Noise texture */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
+            color: var(--accent-red) !important;
+            text-shadow: 2px 0 var(--accent-sage), -2px 0 var(--accent-gold);
+        }
+
+        /* Scanlines & Noise */
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px; pointer-events: none; z-index: 1000; opacity: 0.3;
+        }
+
         .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
-            opacity: 0.05;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 999; opacity: 0.05;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         /* Navigation */
         .nav-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 14, 26, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-subtle);
-            z-index: 100;
-            padding: 0 40px;
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(10, 14, 26, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-subtle); z-index: 100; padding: 0 40px;
         }
 
         .nav-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 60px;
+            max-width: 1400px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; height: 60px;
         }
 
         .logo {
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--accent-gold);
-            text-decoration: none;
-            position: relative;
+            font-weight: 700; font-size: 18px; color: var(--accent-gold);
+            text-decoration: none; position: relative;
         }
 
-        .logo::after {
-            content: '_';
-            animation: blink 1s infinite;
-        }
+        .logo::after { content: '_'; animation: blink 1s infinite; }
 
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
+        @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 
-        .nav-tabs {
-            display: flex;
-            gap: 0;
-        }
+        .nav-tabs { display: flex; gap: 0; }
 
         .nav-tab {
-            padding: 20px 24px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s;
-            position: relative;
+            padding: 20px 24px; color: var(--text-secondary); text-decoration: none;
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+            border-bottom: 2px solid transparent; transition: all 0.3s;
         }
 
-        .nav-tab:hover {
-            color: var(--accent-gold);
-            background: rgba(212, 163, 115, 0.05);
-        }
+        .nav-tab:hover { color: var(--accent-gold); background: rgba(212, 163, 115, 0.05); }
+        .nav-tab.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
 
-        .nav-tab.active {
-            color: var(--accent-gold);
-            border-bottom-color: var(--accent-gold);
-        }
-
+        /* IP INTERROGATOR */
         .nav-status {
-            font-size: 11px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 10px; color: var(--text-muted);
+            display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace;
         }
+
+        #ip-display { color: var(--accent-amber); font-weight: bold; }
 
         .status-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--accent-sage);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            width: 6px; height: 6px; background: var(--accent-sage);
+            border-radius: 50%; animation: pulse 2s infinite;
         }
 
         /* Main Window */
         .main-window {
-            max-width: 1200px;
-            margin: 100px auto 40px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 8px;
-            position: relative;
-            backdrop-filter: blur(20px);
-            box-shadow: 
-                0 0 0 1px rgba(212, 163, 115, 0.1),
-                0 20px 60px rgba(0,0,0,0.5);
+            max-width: 1200px; margin: 100px auto 40px;
+            background: var(--bg-card); border: 1px solid var(--border-subtle);
+            border-radius: 8px; position: relative; backdrop-filter: blur(20px);
+            box-shadow: 0 0 0 1px rgba(212, 163, 115, 0.1), 0 20px 60px rgba(0,0,0,0.5);
         }
 
-        /* Window Header */
         .window-header {
             background: linear-gradient(90deg, rgba(212, 163, 115, 0.1), rgba(135, 168, 120, 0.1));
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--border-subtle);
-            border-radius: 8px 8px 0 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            padding: 12px 20px; border-bottom: 1px solid var(--border-subtle);
+            border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 12px;
         }
 
-        .window-dots {
-            display: flex;
-            gap: 8px;
-        }
-
-        .window-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
+        .window-dots { display: flex; gap: 8px; }
+        .window-dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); }
         .window-dot.red { background: #e07a5f; }
         .window-dot.yellow { background: #f2cc8f; }
         .window-dot.green { background: #81b29a; }
 
-        .window-title {
-            font-size: 12px;
-            color: var(--text-secondary);
-            flex: 1;
-            text-align: center;
-        }
+        .window-title { font-size: 12px; color: var(--text-secondary); flex: 1; text-align: center; }
 
-        /* INIT Sequence Hero */
-        .init-hero {
-            padding: 60px 40px;
-            text-align: center;
-            position: relative;
-        }
-
-        .init-header {
-            font-size: 13px;
-            color: var(--text-muted);
-            letter-spacing: 4px;
-            margin-bottom: 40px;
-        }
-
+        /* INIT Hero */
+        .init-hero { padding: 60px 40px; text-align: center; position: relative; }
+        .init-header { font-size: 11px; color: var(--text-muted); letter-spacing: 4px; margin-bottom: 30px; }
         .init-sequence {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            line-height: 2.2;
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 2;
+            color: var(--text-secondary); max-width: 700px; margin: 0 auto; text-align: left;
         }
 
-        .init-line {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            opacity: 0;
-            animation: fadeInLine 0.5s forwards;
-            width: 100%;
-            justify-content: center;
-        }
-
+        .init-line { display: flex; align-items: center; gap: 12px; opacity: 0; animation: fadeInLine 0.5s forwards; }
         .init-line:nth-child(1) { animation-delay: 0.2s; }
-        .init-line:nth-child(2) { animation-delay: 0.5s; }
-        .init-line:nth-child(3) { animation-delay: 0.8s; }
-        .init-line:nth-child(4) { animation-delay: 1.1s; }
+        .init-line:nth-child(2) { animation-delay: 0.6s; }
+        .init-line:nth-child(3) { animation-delay: 1.0s; }
         .init-line:nth-child(5) { animation-delay: 1.4s; }
-        .init-line:nth-child(6) { animation-delay: 1.7s; }
+        .init-line:nth-child(6) { animation-delay: 1.8s; }
+        .init-line:nth-child(7) { animation-delay: 2.2s; }
+        .init-line:nth-child(8) { animation-delay: 2.6s; }
 
-        @keyframes fadeInLine {
-            to { opacity: 1; }
-        }
+        @keyframes fadeInLine { to { opacity: 1; } }
 
-        .init-status {
-            color: var(--accent-gold);
-            font-weight: 600;
-            min-width: 70px;
-            text-align: right;
-        }
-
+        .init-status { color: var(--accent-gold); font-weight: 600; min-width: 60px; }
         .init-status.ok { color: var(--accent-sage); }
         .init-status.warn { color: var(--accent-amber); }
-        .init-status.init { color: var(--text-muted); font-weight: 400; }
+        .init-dots { color: var(--text-muted); }
 
-        .init-dots {
-            color: var(--text-muted);
-        }
-
-        /* Butterfly DNA Icon - Using your image */
-        .butterfly-container {
-            margin: 30px auto;
-            position: relative;
-            display: inline-block;
-        }
-
+        /* Butterfly DNA */
+        .butterfly-container { margin: 40px auto; position: relative; display: inline-block; }
         .butterfly-icon {
-            width: 220px;
-            height: 220px;
-            border-radius: 24px;
+            width: 200px; height: 200px; border-radius: 24px;
             background: linear-gradient(135deg, #1a1a2e, #0d1321);
-            border: 1px solid var(--border-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center;
+            overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
+        .butterfly-image {
+            width: 160px; height: 160px; object-fit: contain;
+            animation: butterflyFloat 4s ease-in-out infinite;
+        }
+        @keyframes butterflyFloat { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
 
-        .butterfly-icon img {
-            width: 90%;
-            height: 90%;
-            object-fit: contain;
-            filter: brightness(0.9) contrast(1.1);
-        }
+        /* DNA Sync Footer */
+        .dna-sync { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border-subtle); }
+        .dna-sync-header { font-size: 14px; color: var(--accent-gold); letter-spacing: 3px; margin-bottom: 10px; }
+        .dna-pulse { font-size: 16px; color: var(--accent-gold); display: flex; align-items: center; justify-content: center; gap: 15px; }
 
-        .butterfly-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, rgba(212, 163, 115, 0.2), transparent 70%);
-            animation: breathe 4s ease-in-out infinite;
-            pointer-events: none;
-        }
+        /* Sections */
+        .section-divider { text-align: center; padding: 40px 20px; position: relative; }
+        .divider-text { color: var(--accent-gold); font-size: 11px; text-transform: uppercase; letter-spacing: 3px; }
 
-        @keyframes breathe {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
-            50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.7; }
-        }
-
-        /* DNA Sync Section */
-        .dna-sync {
-            margin-top: 30px;
-            padding: 30px;
-            background: rgba(0,0,0,0.2);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .dna-sync-header {
-            font-size: 14px;
-            color: var(--accent-gold);
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-        }
-
-        .dna-pulse {
-            font-size: 16px;
-            color: var(--accent-gold);
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .skull-icon {
-            font-size: 20px;
-            animation: pulse-skull 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-skull {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-
-        /* Init footer sequence */
-        .init-footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-subtle);
-            text-align: center;
-        }
-
-        .init-sigil {
-            font-size: 12px;
-            color: var(--text-muted);
-            letter-spacing: 8px;
-            margin-top: 20px;
-        }
-
-        /* Section divider */
-        .section-divider {
-            text-align: center;
-            padding: 20px;
-            position: relative;
-        }
-
-        .section-divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 20%;
-            right: 20%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
-        }
-
-        .divider-text {
-            display: inline-block;
-            padding: 0 20px;
-            background: var(--bg-card);
-            position: relative;
-            font-size: 11px;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Content sections */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            padding: 40px;
-        }
-
-        @media (max-width: 900px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 40px; }
+        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
 
         .info-card {
-            background: rgba(13, 19, 33, 0.6);
-            border: 1px solid var(--border-subtle);
-            border-radius: 8px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
+            background: rgba(13, 19, 33, 0.6); border: 1px solid var(--border-subtle);
+            border-radius: 8px; padding: 30px; position: relative;
         }
-
         .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
+            content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
             background: linear-gradient(to bottom, var(--accent-gold), var(--accent-sage));
         }
 
-        .card-header {
-            font-size: 11px;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+        .data-label { color: var(--text-secondary); }
+        .data-value { color: var(--accent-gold); font-weight: 600; }
 
-        .card-header::before {
-            content: '//';
-            color: var(--text-muted);
-        }
-
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 13px;
-        }
-
-        .data-row:last-child {
-            border-bottom: none;
-        }
-
-        .data-label {
-            color: var(--text-secondary);
-        }
-
-        .data-value {
-            color: var(--accent-gold);
-            font-weight: 600;
-        }
-
-        /* Profile section */
-        .profile-section {
-            padding: 40px;
-        }
-
-        .profile-header {
-            margin-bottom: 30px;
-        }
-
-        .profile-name {
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            letter-spacing: 2px;
-        }
-
-        .profile-name span {
-            color: var(--accent-gold);
-        }
-
-        .profile-location {
-            font-size: 14px;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .profile-bio {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 14px;
-        }
-
-        .profile-bio strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Timeline */
-        .timeline {
-            padding: 40px;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 30px;
-            padding-bottom: 40px;
-            border-left: 1px solid var(--border-subtle);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -5px;
-            top: 0;
-            width: 9px;
-            height: 9px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(212, 163, 115, 0.5);
-        }
-
-        .timeline-date {
-            font-size: 11px;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .timeline-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .timeline-org {
-            font-size: 12px;
-            color: var(--accent-sage);
-            margin-bottom: 12px;
-        }
-
-        .timeline-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .timeline-desc ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .timeline-desc li {
-            padding: 4px 0;
-            padding-left: 16px;
-            position: relative;
-        }
-
-        .timeline-desc li::before {
-            content: '>';
-            position: absolute;
-            left: 0;
-            color: var(--accent-gold);
-        }
+        /* --- BIOMETRIC HEARTBEAT --- */
+        .heartbeat-svg { width: 50px; height: 20px; stroke: var(--accent-red); fill: none; stroke-width: 2; }
+        .heartbeat-path { stroke-dasharray: 100; stroke-dashoffset: 100; animation: heart-flow 2s linear infinite; }
+        @keyframes heart-flow { to { stroke-dashoffset: 0; } }
 
         /* Footer */
         .footer-status {
-            background: rgba(0,0,0,0.3);
-            border-top: 1px solid var(--border-subtle);
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .status-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .status-indicator {
-            width: 6px;
-            height: 6px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        /* Fade in animation */
-        .fade-in {
-            animation: fadeIn 0.6s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            background: rgba(0,0,0,0.3); border-top: 1px solid var(--border-subtle);
+            padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;
+            font-size: 11px; color: var(--text-muted);
         }
     </style>
-<base target="_blank">
 </head>
 <body>
     <div class="scanlines"></div>
     <div class="noise"></div>
 
-    <!-- Navigation -->
     <nav class="nav-container">
         <div class="nav-inner">
-            <a href="#" class="logo">KM.K</a>
+            <a href="#" class="logo glitch-hover">KM.K ..: >_ :..</a>
             <div class="nav-tabs">
                 <a href="#profile" class="nav-tab active">Profile</a>
-                <a href="#service" class="nav-tab">Service</a>
                 <a href="#capabilities" class="nav-tab">Capabilities</a>
-                <a href="#credentials" class="nav-tab">Credentials</a>
+                <a href="#projects" class="nav-tab">Projects</a>
                 <a href="#contact" class="nav-tab">Contact</a>
             </div>
             <div class="nav-status">
                 <span class="status-dot"></span>
-                <span>SECURE CONNECTION</span>
+                <span id="connection-status">INTERROGATING TARGET...</span>
+                <span id="ip-display"></span>
             </div>
         </div>
     </nav>
 
-    <!-- Main Window -->
     <div class="main-window">
-        <!-- Window Header -->
         <div class="window-header">
             <div class="window-dots">
                 <div class="window-dot red"></div>
                 <div class="window-dot yellow"></div>
                 <div class="window-dot green"></div>
             </div>
-            <div class="window-title">kwasi_kontor_profile.exe</div>
+            <div class="window-title glitch-hover">architect_of_chaos.exe</div>
         </div>
 
-        <!-- INIT Sequence Hero -->
         <div class="init-hero">
             <div class="init-header">..: >_ :..</div>
-
             <div class="init-sequence">
-                <div class="init-line">
-                    <span class="init-status ok">[OK]</span>
-                    <span class="init-dots">...</span>
-                    <span>BREATHE_TOOL_ACTIVE</span>
-                </div>
-                <div class="init-line">
-                    <span class="init-status init">[init-3]</span>
-                    <span class="init-dots">...</span>
-                    <span>i'm-just-here=>for-the-chaos~and-the-red=>TEAM-exploits</span>
-                </div>
-                <div class="init-line">
-                    <span class="init-status warn"><t></t>[WARN]</span>
-                    <span class="init-dots">...</span>
-                    <span>HEART_RATE_VARIABILITY_DETECTED</span>
-                </div>
+                <div class="init-line"><span class="init-status ok">[OK]</span><span class="init-dots">...</span><span>BREATHE_TOOL_ACTIVE ..: :..</span></div>
+                <div class="init-line"><span class="init-status">[init-3]</span><span class="init-dots">...</span><span>i'm-just-here=>for-the-chaos~and-the-red=>TEAM-exploits</span></div>
+                <div class="init-line"><span class="init-status warn">[WARN]</span><span class="init-dots">...</span><span>HEART_RATE_VARIABILITY_DETECTED</span></div>
 
-                <!-- Butterfly DNA Icon - Your Image -->
                 <div class="butterfly-container">
-                    <div class="butterfly-icon">
-                        <div class="butterfly-glow"></div>
-                        <!-- Replace src with your actual butterfly image path -->
-                        <img src="butterfly-dna.png" alt="butterfly-dna" onerror="this.style.display='none'">
-                    </div>
+                    <div class="butterfly-icon"><img src="butterfly-dna.jpeg" alt="Butterfly DNA" class="butterfly-image"></div>
+                    <div class="butterfly-label" style="text-align: center; font-size: 10px; margin-top: 10px; color: var(--accent-gold);">ADAPTIVE_DNA_PROTOCOL</div>
                 </div>
 
-                <div class="init-line">
-                    <span class="init-status ok">[OK]</span>
-                    <span class="init-dots">...</span>
-                    <span>1843_LOVELACE_NOTES_DECRYPTED</span>
-                </div>
-                <div class="init-line">
-                    <span class="init-status init">[init-1]</span>
-                    <span class="init-dots">...</span>
-                    <span>LOADING_ADAPTIVE_DNA_PROTOCOL</span>
-                </div>
-                <div class="init-line">
-                    <span class="init-status ok">[OK]</span>
-                    <span class="init-dots">...</span>
-                    <span>COMPILER_VERSION_GRACE_HOPPER</span>
-                </div>
+                <div class="init-line"><span class="init-status ok">[OK]</span><span class="init-dots">...</span><span>1843_LOVELACE_NOTES_DECRYPTED</span></div>
+                <div class="init-line"><span class="init-status">[init-1]</span><span class="init-dots">...</span><span>LOADING_ADAPTIVE_DNA_PROTOCOL</span></div>
+                <div class="init-line"><span class="init-status ok">[OK]</span><span class="init-dots">...</span><span>COMPILER_VERSION_GRACE_HOPPER</span></div>
+                <div class="init-line" style="justify-content: center; margin-top: 10px; color: var(--accent-gold); opacity: 0.8;"><span>init-6 ~ ^ ~ init-0</span></div>
             </div>
 
-            <!-- DNA Sync Section -->
             <div class="dna-sync">
                 <div class="dna-sync-header">#--- DnA_SynC_2027 ... ARCHITECT_OF_CHAOS ---#</div>
                 <div class="dna-pulse">
-                    <span>☠️</span>
-                    <span>--</span>
-                    <span>Bonesaw//</span>
-                    <span>..:</span>
-                    <span class="skull-icon">💀</span>
-                    <span>:..</span>
-                    <span>\InitialPulseCerberus</span>
-                    <span>--</span>
-                    <span>☠️</span>
-                </div>
-            </div>
-
-            <!-- Init Sigil -->
-            <div class="init-footer">
-                <div class="init-sigil">init-6 ~ ^ ~ init-0</div>
-            </div>
-        </div>
-
-        <!-- Section Divider -->
-        <div class="section-divider">
-            <span class="divider-text">// Information Technology & Security Professional</span>
-        </div>
-
-        <!-- Profile Grid -->
-        <div class="content-grid" id="profile">
-            <div class="profile-section fade-in">
-                <div class="profile-header">
-                    <h2 class="profile-name">KWASI <span>M. KONTOR</span></h2>
-                    <div class="profile-location">
-                        <span>📍</span> Los Angeles, CA
-                    </div>
-                </div>
-                <div class="profile-bio">
-                    <p>Experienced in <strong>cybersecurity protocols</strong>, <strong>network management</strong>, <strong>hardware and software support</strong>, and <strong>technical leadership</strong>. Proven ability to supervise teams of 10+ personnel, maintain complex F/A-18E/F Super Hornet aircraft systems, and deliver innovative solutions under high-pressure operational conditions.</p>
-                    <br>
-                    <p>Pursuing a <strong>Bachelor of Science in Cybersecurity</strong> at the University of Phoenix (expected October 2028), building on a Certificate of Achievement in Information Technology Plus and hands-on experience with command-line Python, cloud security frameworks, and VPN implementation.</p>
-                </div>
-            </div>
-
-            <div class="info-card fade-in">
-                <div class="card-header">Operational Status</div>
-                <div class="data-row">
-                    <span class="data-label">Warfare Qual</span>
-                    <span class="data-value">EAWS (Enlisted)</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">Decoration</span>
-                    <span class="data-value">NAM</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">Team Lead</span>
-                    <span class="data-value">10+ Personnel</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">Platform</span>
-                    <span class="data-value">F/A-18E/F</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">Location</span>
-                    <span class="data-value" style="color: var(--accent-amber);">Los Angeles, CA</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">Service</span>
-                    <span class="data-value" style="color: var(--accent-amber);">USN 2017-2022</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">Security Lic.</span>
-                    <span class="data-value" style="color: var(--accent-amber);">Active 2027</span>
+                    <span>☠️</span><span class="glitch-hover">-- Bonesaw// ..: 💀 :.. \InitialPulseCerberus --</span><span>☠️</span>
                 </div>
             </div>
         </div>
 
-        <!-- Experience Timeline -->
-        <div class="section-divider">
-            <span class="divider-text">// Service Record & Employment History</span>
-        </div>
+        <div class="section-divider"><span class="divider-text">// RECON & CAPABILITIES // ..: :..</span></div>
 
-        <div class="timeline" id="service">
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">2017 - 2022 • Full-Time • NAS Lemoore, CA</div>
-                <div class="timeline-title">Aviation Machinist's Mate — Petty Officer Second Class (E-5)</div>
-                <div class="timeline-org">United States Navy • F/A-18E/F Super Hornet Squadron</div>
-                <div class="timeline-desc">
-                    <ul>
-                        <li>Qualified <strong>Enlisted Aviation Warfare Specialist (EAWS)</strong> — certified expert in naval aviation operations, aircraft systems, and warfare protocols</li>
-                        <li>Awarded the <strong>Navy and Marine Corps Achievement Medal</strong> for exceptional professional achievement and superior performance of duties</li>
-                        <li>Supervised, trained, and mentored <strong>10 sailors</strong> in aircraft maintenance, engine replacement operations, and technical troubleshooting</li>
-                        <li>Managed comprehensive inspections and servicing operations including fuel system maintenance and fuel cell repairs on <strong>F/A-18E/F Super Hornets</strong></li>
-                        <li>Performed advanced turbine engine troubleshooting and maintenance; enforced strict safety protocols and QA standards across all operations</li>
-                        <li>Collaborated with cross-functional teams to ensure aircraft readiness and mission efficiency</li>
-                    </ul>
+        <section id="capabilities">
+            <div class="content-grid">
+                <div class="info-card">
+                    <div class="data-row"><span class="data-label">Primary Objective</span><span class="data-value">RED TEAM OPS</span></div>
+                    <div class="data-row"><span class="data-label">Surface Recon</span><span class="data-value">VULN ASSESSMENT</span></div>
+                    <div class="data-row"><span class="data-label">Adaptive Defense</span><span class="data-value">BLUE TEAM SOC</span></div>
+                    <div class="data-row"><span class="data-label">Deployment</span><span class="data-value">AZURE CLOUD</span></div>
+                </div>
+                <div class="info-card">
+                    <div class="data-row"><span class="data-label">Tactical Leadership</span><span class="data-value">USN VETERAN (E-5)</span></div>
+                    <div class="data-row"><span class="data-label">System Integrity</span><span class="data-value">F/A-18 SUPER HORNET</span></div>
+                    <div class="data-row"><span class="data-label">Location</span><span class="data-value">LOS ANGELES NODE</span></div>
+                    <div class="data-row"><span class="data-label">Status</span><span class="data-value" style="color: var(--accent-sage);">BREATHING ..: :..</span></div>
                 </div>
             </div>
+        </section>
 
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">May 2015 - Jan 2016 • Part-Time</div>
-                <div class="timeline-title">Technical Solutions Associate</div>
-                <div class="timeline-org">Staples, Inc. • Alexandria, VA</div>
-                <div class="timeline-desc">
-                    <ul>
-                        <li>Served as <strong>Subject Matter Expert</strong> for technical sales — hardware/software installation, configuration, and troubleshooting</li>
-                        <li>Processed and resolved customer service tickets; strong technical communication and customer service delivery</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer Status Bar -->
         <div class="footer-status">
-            <div class="status-left">
-                <div class="status-indicator"></div>
-                <span>ENCODING MEMORY...</span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <svg class="heartbeat-svg" viewBox="0 0 50 20">
+                    <path class="heartbeat-path" d="M0,10 L10,10 L12,5 L15,15 L18,10 L50,10" />
+                </svg>
+                <span>BIOMETRIC FEED: STABLE ..: :..</span>
             </div>
-            <div>
-                <span>KMK // ... // IT & SECURITY</span>
-            </div>
+            <div><span>KMK // ARCHITECT_OF_CHAOS // 2024</span></div>
         </div>
     </div>
 
     <script>
-        // Smooth scroll for navigation
+        // IP INTERROGATOR SCRIPT
+        async function interrogateIP() {
+            const statusEl = document.getElementById('connection-status');
+            const ipEl = document.getElementById('ip-display');
+            
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                
+                setTimeout(() => {
+                    statusEl.innerText = "CAPTURED PACKETS. NOTHING WEIRD, JUST ANALYZING CONNECTION :) ";
+                    ipEl.innerText = `[${data.ip}]`;
+                }, 2000);
+            } catch (e) {
+                statusEl.innerText = "STEALTH PROTOCOL ACTIVE ..: :..";
+            }
+        }
+        interrogateIP();
+
+        // Smooth Scroll
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = document.querySelector(tab.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Active nav state on scroll
-        window.addEventListener('scroll', () => {
-            const sections = ['profile', 'service', 'capabilities', 'credentials', 'contact'];
-            const scrollPos = window.scrollY + 100;
-
-            sections.forEach(section => {
-                const el = document.getElementById(section);
-                if (el && el.offsetTop <= scrollPos && el.offsetTop + el.offsetHeight > scrollPos) {
-                    document.querySelectorAll('.nav-tab').forEach(tab => {
-                        tab.classList.remove('active');
-                        if (tab.getAttribute('href') === `#${section}`) {
-                            tab.classList.add('active');
-                        }
-                    });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>

@@ -209,16 +209,49 @@
         .init-dots { color: var(--text-muted); }
 
         .butterfly-container { margin: 40px auto; position: relative; display: inline-block; }
-        .butterfly-icon {
-            width: 200px; height: 200px; border-radius: 24px;
-            background: linear-gradient(135deg, #1a1a2e, #0d1321);
-            border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center;
-            overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
-        .butterfly-image {
-            width: 160px; height: 160px; object-fit: contain;
-            animation: butterflyFloat 4s ease-in-out infinite;
-        }
+        /* Enhanced Butterfly Container */
+.butterfly-icon {
+    width: 200px;
+    height: 200px;
+    /* Rounding the edges */
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* Organic asymmetrical round */
+    background: linear-gradient(135deg, #1a1a2e, #0d1321);
+    border: 2px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+    /* Bio-luminescent glow */
+    box-shadow: 0 0 20px rgba(212, 163, 115, 0.1), 
+                inset 0 0 15px rgba(135, 168, 120, 0.2);
+    
+    /* Subtle pulsing pulse */
+    animation: bio-pulse 4s ease-in-out infinite;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.butterfly-icon:hover {
+    border-radius: 50%; /* Becomes a circle on hover */
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 30px rgba(212, 163, 115, 0.3);
+    transform: scale(1.05);
+}
+
+/* Background Pulse for the Container */
+@keyframes bio-pulse {
+    0%, 100% { border-color: rgba(212, 163, 115, 0.2); }
+    50% { border-color: rgba(135, 168, 120, 0.5); }
+}
+
+/* Make the internal image pop */
+.butterfly-image {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(212, 163, 115, 0.5));
+    animation: butterflyFloat 4s ease-in-out infinite;
+}
         @keyframes butterflyFloat { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
         .butterfly-label { text-align: center; font-size: 10px; margin-top: 10px; color: var(--accent-gold); letter-spacing: 2px; }
 
@@ -307,9 +340,11 @@
                 <div class="init-line"><span class="init-status warn">[WARN]</span><span class="init-dots">...</span><span>HEART_RATE_VARIABILITY_DETECTED</span></div>
 
                 <div class="butterfly-container">
-                    <div class="butterfly-icon"><img src="butterfly-dna.jpeg" alt="Butterfly DNA" class="butterfly-image"></div>
-                    <div class="butterfly-label">ADAPTIVE_DNA_PROTOCOL</div>
-                </div>
+    <div class="butterfly-icon">
+        <img src="butterfly-dna.jpeg" alt="Butterfly DNA" class="butterfly-image">
+    </div>
+    <div class="butterfly-label breathing-status">ADAPTIVE_DNA_PROTOCOL</div>
+</div>
 
                 <div class="init-line"><span class="init-status ok">[OK]</span><span class="init-dots">...</span><span>1843_LOVELACE_NOTES_DECRYPTED</span></div>
                 <div class="init-line"><span class="init-status">[init-1]</span><span class="init-dots">...</span><span>LOADING_ADAPTIVE_DNA_PROTOCOL</span></div>

@@ -5,6 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KWASI M. KONTOR ~ THREAT INFORMED DEFENSE</title>
     <style>
+
+            /* --- NEW ANIMATIONS --- */
+
+    /* Breathing Effect for "BREATHING ..: :.." and "BREATHE_TOOL_ACTIVE" */
+    @keyframes soft-glow-breath {
+        0%, 100% { opacity: 1; text-shadow: 0 0 5px var(--accent-sage); }
+        50% { opacity: 0.4; text-shadow: 0 0 20px var(--accent-sage); transform: scale(1.02); }
+    }
+
+    .breathing-text {
+        display: inline-block;
+        animation: soft-glow-breath 4s ease-in-out infinite;
+        color: var(--accent-sage) !important;
+    }
+
+    /* Skull Glitch & Spin */
+    @keyframes skull-chaos {
+        0% { transform: rotate(0deg) scale(1); filter: hue-rotate(0deg); }
+        25% { transform: rotate(-10deg) scale(1.2); filter: hue-rotate(90deg); }
+        50% { transform: rotate(10deg) scale(0.9); text-shadow: 3px 0 red, -3px 0 blue; }
+        75% { transform: rotate(-5deg) scale(1.1); }
+        100% { transform: rotate(0deg) scale(1); }
+    }
+
+    .glitch-skull-active {
+        display: inline-block;
+        animation: skull-chaos 0.5s steps(2) infinite;
+    }
+
+    /* Footer Rolling Text Effect */
+    @keyframes footer-slide {
+        0% { transform: translateY(0); opacity: 0.8; }
+        50% { transform: translateY(-2px); opacity: 1; color: var(--accent-gold); }
+        100% { transform: translateY(0); opacity: 0.8; }
+    }
+
+    .footer-animate {
+        display: inline-block;
+        animation: footer-slide 3s ease-in-out infinite;
+        letter-spacing: 2px;
+    }
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap');
 
         * {
@@ -258,8 +299,11 @@
         <div class="init-hero">
             <div class="init-header">..: >_ :..</div>
             <div class="init-sequence">
-                <div class="init-line"><span class="init-status ok">[OK]</span><span class="init-dots">...</span><span>BREATHE_TOOL_ACTIVE ..: :..</span></div>
-                <div class="init-line"><span class="init-status">[init-3]</span><span class="init-dots">...</span><span>i'm-just-here=>for-the-chaos~and-the-TACTICAL=>BLUE-intel</span></div>
+<div class="init-line">
+    <span class="init-status ok">[OK]</span>
+    <span class="init-dots">...</span>
+    <span class="breathing-text">BREATHE_TOOL_ACTIVE ..: :..</span></div>                
+    <div class="init-line"><span class="init-status">[init-3]</span><span class="init-dots">...</span><span>i'm-just-here=>for-the-chaos~and-the-TACTICAL=>BLUE-intel</span></div>
                 <div class="init-line"><span class="init-status warn">[WARN]</span><span class="init-dots">...</span><span>HEART_RATE_VARIABILITY_DETECTED</span></div>
 
                 <div class="butterfly-container">
@@ -276,8 +320,11 @@
             <div class="dna-sync">
                 <div class="dna-sync-header">#--- DnA_SynC_2027 ... THREAT_INFORMED_DEFENSE ---#</div>
                 <div class="dna-pulse">
-                    <span>☠️</span><span class="glitch-hover">-- Bonesaw// ..: 💀 :.. \InitialPulseCerberus --</span><span>☠️</span>
-                </div>
+<div class="dna-pulse">
+    <span class="glitch-skull-active">☠️</span>
+    <span class="glitch-hover">-- Bonesaw// ..: <span class="glitch-skull-active">💀</span> :.. \InitialPulseCerberus --</span>
+    <span class="glitch-skull-active">☠️</span>
+</div>                </div>
             </div>
         </div>
 
@@ -302,8 +349,10 @@
                     <div class="data-row"><span class="data-label">Tactical Leadership</span><span class="data-value">USN VETERAN (E-5)</span></div>
                     <div class="data-row"><span class="data-label">System Integrity</span><span class="data-value">F/A-18 SUPER HORNET</span></div>
                     <div class="data-row"><span class="data-label">Location</span><span class="data-value">LOS ANGELES NODE</span></div>
-                    <div class="data-row"><span class="data-label">Status</span><span class="data-value" style="color: var(--accent-sage);">BREATHING ..: :..</span></div>
-                </div>
+<div class="data-row">
+    <span class="data-label">Status</span>
+    <span class="data-value breathing-text">BREATHING ..: :..</span>
+</div>                </div>
             </div>
         </section>
 
@@ -498,7 +547,7 @@
                 </svg>
                 <span>BIOMETRIC FEED: STABLE ..: :..</span>
             </div>
-            <div><span>KMK // THREAT_INFORMED_DEFENSE // 2024</span></div>
+            <div><span class="footer-animate">KMK // THREAT_INFORMED_DEFENSE // 2024</span></div>
         </div>
     </div>
 
@@ -514,8 +563,8 @@
                 
                 setTimeout(() => {
                     // Tactical Blue Rephrasing with Glitch Skull and Signature
-                    statusEl.innerHTML = `TARGET ANALYZED. NOTHING WEIRD, JUST VERIFYING CONNECTION <span class="glitch-skull">💀</span> ..: :.. `;
-                    ipEl.innerText = `[${data.ip}]`;
+// Inside your interrogateIP function, change the statusEl.innerHTML line to:
+statusEl.innerHTML = `TARGET ANALYZED. NOTHING WEIRD, JUST VERIFYING CONNECTION <span class="glitch-skull-active">💀</span> ..: :.. `;                    ipEl.innerText = `[${data.ip}]`;
                 }, 2000);
             } catch (e) {
                 statusEl.innerText = "STEALTH PROTOCOL ACTIVE ..: :..";

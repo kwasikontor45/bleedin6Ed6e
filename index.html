@@ -17,6 +17,7 @@
             --accent-red: #e07a5f;
             --text-primary: #e8e8e8;
             --text-secondary: #a0a0a0;
+            --text-muted: #6b7280;
             --border-subtle: rgba(212, 163, 115, 0.2);
         }
 
@@ -28,6 +29,20 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes soft-glow-breath {
+            0%, 100% { opacity: 1; text-shadow: 0 0 5px var(--accent-sage); }
+            50% { opacity: 0.4; text-shadow: 0 0 20px var(--accent-sage); transform: scale(1.02); }
+        }
+        @keyframes skull-pulse-center {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px var(--accent-red)); opacity: 1; }
+            50% { transform: scale(1.3); filter: drop-shadow(0 0 15px var(--accent-red)); opacity: 0.8; }
+        }
+        @keyframes bio-pulse {
+            0%, 100% { border-color: rgba(212, 163, 115, 0.2); box-shadow: 0 0 20px rgba(212, 163, 115, 0.1); }
+            50% { border-color: rgba(135, 168, 120, 0.5); box-shadow: 0 0 30px rgba(135, 168, 120, 0.3); }
         }
 
         /* --- UI OVERLAYS --- */
@@ -47,55 +62,66 @@
             max-width: 1200px; margin: 0 auto; padding: 0 20px;
             display: flex; justify-content: space-between; align-items: center; height: 60px;
         }
-        .logo { font-weight: 700; color: var(--accent-gold); text-decoration: none; font-size: 0.9rem; }
+        .logo { font-weight: 700; color: var(--accent-gold); text-decoration: none; font-size: 1rem; }
         .nav-tabs { display: flex; gap: 10px; }
-        .nav-tab { color: var(--text-secondary); text-decoration: none; font-size: 10px; text-transform: uppercase; padding: 5px; }
-        .nav-tab.active { color: var(--accent-gold); }
+        .nav-tab { color: var(--text-secondary); text-decoration: none; font-size: 10px; text-transform: uppercase; padding: 10px; }
+        .nav-tab.active { color: var(--accent-gold); border-bottom: 2px solid var(--accent-gold); }
 
         /* --- MAIN WINDOW --- */
         .main-window {
-            max-width: 1000px; margin: 80px auto 40px;
+            max-width: 1100px; margin: 80px auto 40px;
             background: var(--bg-card); border: 1px solid var(--border-subtle);
-            border-radius: 8px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border-radius: 8px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
+        .window-header {
+            background: rgba(212, 163, 115, 0.05); padding: 12px 20px;
+            border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 10px;
+        }
+        .window-dot { width: 10px; height: 10px; border-radius: 50%; }
 
         /* --- HERO SECTION --- */
         .init-hero { padding: 40px 20px; text-align: center; }
-        .butterfly-container { margin: 20px auto; position: relative; display: inline-block; }
-        .butterfly-image {
-            width: 250px; height: auto;
-            filter: drop-shadow(0 0 15px var(--accent-gold));
+        .butterfly-icon {
+            width: 200px; height: 200px; margin: 0 auto;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            border: 2px solid var(--border-subtle);
+            display: flex; align-items: center; justify-content: center;
+            animation: bio-pulse 4s ease-in-out infinite;
         }
+        .butterfly-image { width: 100%; height: auto; border-radius: inherit; }
 
-        /* --- KATALEYA VIDEO & PROJECT --- */
-        .project-card { padding: 40px 20px; border-top: 1px solid var(--border-subtle); }
+        /* --- GRIDS & CARDS --- */
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px 40px; }
+        .info-card { 
+            background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); 
+            border-radius: 8px; padding: 20px; border-left: 4px solid var(--accent-gold);
+        }
+        .data-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+
+        /* --- PROJECT ELEMENTS --- */
+        .project-card { padding: 40px; border-top: 1px solid var(--border-subtle); }
         .video-wrapper {
-            width: 100%; max-width: 700px; margin: 0 auto 30px;
-            border-radius: 12px; overflow: hidden;
-            border: 1px solid var(--border-subtle);
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            width: 100%; max-width: 800px; margin: 30px auto;
+            border-radius: 12px; overflow: hidden; border: 1px solid var(--border-subtle);
             background: #000;
         }
         .video-wrapper video { width: 100%; display: block; }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
-        .info-box { 
-            background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; 
-            border-left: 3px solid var(--accent-gold); font-size: 13px;
-        }
+        /* --- STATE ENGINE --- */
+        .engine-container { background: #0a0e1a; padding: 30px; border-radius: 12px; margin-top: 30px; }
+        .node-row { display: flex; justify-content: space-between; gap: 10px; margin: 20px 0; }
+        .node { flex: 1; padding: 15px; border-radius: 8px; text-align: center; font-size: 11px; border: 1px solid rgba(255,255,255,0.1); }
 
-        /* --- MOBILE OPTIMIZATION --- */
+        /* --- MOBILE --- */
         @media (max-width: 768px) {
+            .content-grid, .node-row { grid-template-columns: 1fr; display: block; }
+            .node { margin-bottom: 10px; }
             .nav-tabs { display: none; }
-            .grid-2 { grid-template-columns: 1fr; }
-            .main-window { margin: 70px 10px 20px; border-radius: 0; }
-            .video-wrapper { border-radius: 4px; }
-            .butterfly-image { width: 180px; }
+            .main-window { margin: 70px 10px; border-radius: 4px; }
         }
 
-        /* --- ANIMATIONS --- */
-        .breathing-status { animation: breath 4s ease-in-out infinite; }
-        @keyframes breath { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+        .breathing-text { animation: soft-glow-breath 4s ease-in-out infinite; color: var(--accent-sage) !important; }
+        .skull-center { animation: skull-pulse-center 3s ease-in-out infinite; display: inline-block; margin: 0 10px; }
     </style>
 </head>
 <body>
@@ -103,55 +129,124 @@
 
     <nav class="nav-container">
         <div class="nav-inner">
-            <a href="#" class="logo">KM.K // THREAT_DEFENSE</a>
+            <a href="#" class="logo">KM.K ..: >_ :..</a>
             <div class="nav-tabs">
                 <a href="#profile" class="nav-tab">Profile</a>
+                <a href="#capabilities" class="nav-tab">Capabilities</a>
                 <a href="#projects" class="nav-tab active">Projects</a>
                 <a href="#contact" class="nav-tab">Contact</a>
             </div>
+            <div style="font-size: 10px; color: var(--text-muted);"><span id="ip-display">[INTERROGATING...]</span></div>
         </div>
     </nav>
 
     <div class="main-window">
-        <section class="init-hero">
-            <div class="butterfly-container">
-                <img src="butterfly-dna.gif" alt="DNA Butterfly" class="butterfly-image">
-                <div class="breathing-status" style="font-size: 10px; color: var(--accent-gold); margin-top: 15px;">ADAPTIVE_DNA_PROTOCOL // ACTIVE</div>
+        <div class="window-header">
+            <div style="display: flex; gap: 6px;">
+                <div class="window-dot" style="background:#e07a5f"></div>
+                <div class="window-dot" style="background:#f2cc8f"></div>
+                <div class="window-dot" style="background:#81b29a"></div>
             </div>
-            <h1 style="font-size: 2rem;">KWASI <span style="color: var(--accent-gold);">M. KONTOR</span></h1>
-            <p style="color: var(--text-secondary); font-size: 14px; max-width: 600px; margin: 10px auto;">
-                U.S. Navy Veteran | Threat-Informed Defense | Adversary Emulation
+            <div style="flex:1; text-align:center; font-size:11px; color:var(--text-secondary);">threat_informed_defense.exe</div>
+        </div>
+
+        <section class="init-hero">
+            <div class="butterfly-icon">
+                <img src="butterfly-dna.gif" alt="DNA Butterfly" class="butterfly-image">
+            </div>
+            <div class="breathing-text" style="margin-top: 20px; font-size: 11px;">ADAPTIVE_DNA_PROTOCOL // ACTIVE</div>
+            <h1 style="font-size: 2.2rem; margin: 15px 0;">KWASI <span style="color: var(--accent-gold);">M. KONTOR</span></h1>
+            <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-size: 14px;">
+                U.S. Navy Veteran | Strategic cybersecurity professional specializing in threat-informed defense.
             </p>
+            <div style="margin-top: 30px; font-size: 14px;">
+                <span class="skull-center">💀</span> Bonesaw// ..: InitialPulseCerberus :.. <span class="skull-center">💀</span>
+            </div>
+        </section>
+
+        <section id="capabilities" class="content-grid">
+            <div class="info-card">
+                <div class="data-row"><span>Objective</span><span style="color:var(--accent-gold)">THREAT DEFENSE</span></div>
+                <div class="data-row"><span>Logic</span><span style="color:var(--accent-gold)">ADVERSARY EMULATION</span></div>
+                <div class="data-row"><span>Status</span><span class="breathing-text">BREATHING ..: :..</span></div>
+            </div>
+            <div class="info-card" style="border-left-color: var(--accent-sage);">
+                <div class="data-row"><span>Tactical</span><span style="color:var(--accent-sage)">USN VETERAN</span></div>
+                <div class="data-row"><span>Platform</span><span style="color:var(--accent-sage)">F/A-18 SUPER HORNET</span></div>
+                <div class="data-row"><span>Node</span><span style="color:var(--accent-sage)">LOS ANGELES</span></div>
+            </div>
         </section>
 
         <section id="projects" class="project-card">
             <div style="text-align: center; margin-bottom: 30px;">
                 <h2 style="color: var(--accent-gold);">KATALEYA</h2>
-                <p style="font-size: 12px; color: var(--text-secondary);">Privacy-First Recovery Support Mobile App</p>
+                <p style="font-size: 13px; color: var(--text-secondary);">Privacy-First Recovery Support Mobile App</p>
             </div>
 
             <div class="video-wrapper">
                 <video autoplay muted loop playsinline controls>
                     <source src="katas.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
                 </video>
             </div>
 
-            <div class="grid-2">
-                <div class="info-box">
-                    <h4 style="color: var(--accent-gold); margin-bottom: 10px;">TECHNICAL ARCHITECTURE</h4>
-                    <p>React Native / Expo 54. Three-vault privacy architecture. E2E encrypted messaging via X25519.</p>
+            <div class="content-grid" style="padding: 0;">
+                <div class="info-card">
+                    <h4 style="font-size: 11px; margin-bottom: 10px; color: var(--accent-gold);">TECHNICAL ARCHITECTURE</h4>
+                    <p style="font-size: 12px; color: var(--text-secondary);">React Native / Expo 54. Three-vault privacy architecture. E2E encrypted messaging via X25519/XSalsa20-Poly1305. Local ML-powered insights.</p>
                 </div>
-                <div class="info-box" style="border-left-color: var(--accent-sage);">
-                    <h4 style="color: var(--accent-sage); margin-bottom: 10px;">HUMAN OBJECTIVE</h4>
-                    <p>A digital sanctuary for recovery. Circadian-aware UI that shifts with your natural rhythm.</p>
+                <div class="info-card" style="border-left-color: var(--accent-sage);">
+                    <h4 style="font-size: 11px; margin-bottom: 10px; color: var(--accent-sage);">HUMAN OBJECTIVE</h4>
+                    <p style="font-size: 12px; color: var(--text-secondary);">A digital sanctuary for recovery. Circadian-aware UI that shifts with your natural rhythm. Health data never leaves the device.</p>
+                </div>
+            </div>
+
+            <div class="engine-container">
+                <h3 style="font-size: 12px; text-align: center; letter-spacing: 2px; color: var(--text-secondary);">THE STATE ENGINE WORKFLOW</h3>
+                <div class="node-row">
+                    <div class="node" style="background: rgba(135, 168, 120, 0.1); border-color: var(--accent-sage);">BODY<br><small>circadian • urge</small></div>
+                    <div class="node" style="background: rgba(212, 163, 115, 0.1); border-color: var(--accent-gold);">MIND<br><small>mood • journal</small></div>
+                    <div class="node" style="background: rgba(224, 122, 95, 0.1); border-color: var(--accent-red);">SOUL<br><small>breath • ritual</small></div>
+                </div>
+                <div style="text-align: center; color: var(--text-muted); font-size: 20px;">↓</div>
+                <div class="node" style="max-width: 200px; margin: 10px auto; border-color: var(--accent-gold);">STATE ENGINE</div>
+                <div style="text-align: center; color: var(--text-muted); font-size: 20px;">↓</div>
+                <div class="node-row">
+                    <div class="node" style="color:var(--accent-red)">STRUGGLING</div>
+                    <div class="node" style="color:#6b9dc7">STABLE</div>
+                    <div class="node" style="color:var(--accent-sage)">THRIVING</div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" style="padding: 40px; text-align: center;">
-            <p style="font-size: 11px; color: var(--text-secondary);">SIGNAL_CHANNEL: stormdesk57@gmail.com</p>
+        <section class="project-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-size: 20px;">Blue Team SOC Home Lab</h2>
+                <span style="background: rgba(135, 168, 120, 0.2); border: 1px solid var(--accent-sage); color: var(--accent-sage); padding: 4px 12px; border-radius: 4px; font-size: 10px;">ACTIVE</span>
+            </div>
+            <ul style="font-size: 13px; color: var(--text-secondary); list-style: none;">
+                <li style="margin-bottom: 10px;">◆ Built cloud-native SOC using Splunk Cloud, Azure, and NextDNS</li>
+                <li style="margin-bottom: 10px;">◆ Deployed Ubuntu honeypot and Windows Server 2022 VMs with Sysmon</li>
+                <li style="margin-bottom: 10px;">◆ Developed 9 detection rules for DNS tunneling and brute force attacks</li>
+            </ul>
         </section>
+
+        <div class="window-header" style="justify-content: space-between; border-top: 1px solid var(--border-subtle);">
+            <div style="font-size: 10px; color: var(--accent-sage);">● BIOMETRIC FEED: STABLE ..: :..</div>
+            <div style="font-size: 10px; color: var(--text-muted);">KMK // THREAT_INFORMED_DEFENSE // 2026</div>
+        </div>
     </div>
+
+    <script>
+        async function getIP() {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                document.getElementById('ip-display').innerText = `[TARGET: ${data.ip}]`;
+            } catch (e) {
+                document.getElementById('ip-display').innerText = "[STEALTH_ACTIVE]";
+            }
+        }
+        getIP();
+    </script>
 </body>
 </html>

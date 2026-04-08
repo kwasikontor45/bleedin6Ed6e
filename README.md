@@ -12,3 +12,6 @@
 [OK]	 ...	COMPILER_VERSION_GRACE_HOPPER <br>	
 
 init-6 ~ ^ ~ init-0    
+
+![butterfly-dna](https://github.com/user-attachments/assets/99c12515-88d2-4619-9524-7bdf7d9807a0)
+

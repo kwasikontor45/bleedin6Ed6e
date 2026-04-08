@@ -48,8 +48,9 @@
             display: flex; justify-content: space-between; align-items: center; height: 60px;
         }
         .logo { font-weight: 700; color: var(--accent-gold); text-decoration: none; font-size: 0.9rem; }
-        .nav-status { font-size: 9px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
-        .status-dot { width: 6px; height: 6px; background: var(--accent-sage); border-radius: 50%; animation: pulse 2s infinite; }
+        .nav-tabs { display: flex; gap: 10px; }
+        .nav-tab { color: var(--text-secondary); text-decoration: none; font-size: 10px; text-transform: uppercase; padding: 5px; }
+        .nav-tab.active { color: var(--accent-gold); }
 
         /* --- MAIN WINDOW --- */
         .main-window {
@@ -57,27 +58,17 @@
             background: var(--bg-card); border: 1px solid var(--border-subtle);
             border-radius: 8px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
-        .window-header {
-            background: rgba(212, 163, 115, 0.05); padding: 10px 20px;
-            border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center;
-        }
-        .window-dots { display: flex; gap: 6px; }
-        .window-dot { width: 10px; height: 10px; border-radius: 50%; opacity: 0.7; }
-        .red { background: var(--accent-red); } .yellow { background: var(--accent-amber); } .green { background: var(--accent-sage); }
-        .window-title { flex: 1; text-align: center; font-size: 10px; color: var(--text-secondary); letter-spacing: 1px; }
 
-        /* --- SECTIONS --- */
-        section { padding: 40px 20px; }
-        .section-divider { 
-            text-align: center; padding: 20px; 
-            background: rgba(212, 163, 115, 0.03);
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-            color: var(--accent-gold); font-size: 10px; letter-spacing: 2px;
+        /* --- HERO SECTION --- */
+        .init-hero { padding: 40px 20px; text-align: center; }
+        .butterfly-container { margin: 20px auto; position: relative; display: inline-block; }
+        .butterfly-image {
+            width: 250px; height: auto;
+            filter: drop-shadow(0 0 15px var(--accent-gold));
         }
 
         /* --- KATALEYA VIDEO & PROJECT --- */
-        .project-card { margin-bottom: 40px; }
+        .project-card { padding: 40px 20px; border-top: 1px solid var(--border-subtle); }
         .video-wrapper {
             width: 100%; max-width: 700px; margin: 0 auto 30px;
             border-radius: 12px; overflow: hidden;
@@ -93,30 +84,17 @@
             border-left: 3px solid var(--accent-gold); font-size: 13px;
         }
 
-        /* --- ADAPTIVE ELEMENTS --- */
-        .butterfly-container { text-align: center; padding: 40px 0; }
-        .butterfly-icon {
-            width: auto; height: auto; border-radius: 0;
-            background: none;
-            margin: 0 auto; display: flex; align-items: center; justify-content: center;
-            border: none; animation: none;
-        }
-        .butterfly-image { width: 100%; max-width: 700px; height: auto; object-fit: contain; }
-
         /* --- MOBILE OPTIMIZATION --- */
         @media (max-width: 768px) {
-            .nav-inner { padding: 0 15px; }
-            .nav-status { display: none; }
+            .nav-tabs { display: none; }
             .grid-2 { grid-template-columns: 1fr; }
             .main-window { margin: 70px 10px 20px; border-radius: 0; }
-            .profile-name { font-size: 1.5rem; }
-            .init-sequence { font-size: 11px; }
-            .video-wrapper { border-radius: 0; }
+            .video-wrapper { border-radius: 4px; }
+            .butterfly-image { width: 180px; }
         }
 
         /* --- ANIMATIONS --- */
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        .breathing { animation: breath 3s ease-in-out infinite; }
+        .breathing-status { animation: breath 4s ease-in-out infinite; }
         @keyframes breath { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
     </style>
 </head>
@@ -126,78 +104,54 @@
     <nav class="nav-container">
         <div class="nav-inner">
             <a href="#" class="logo">KM.K // THREAT_DEFENSE</a>
-            <div class="nav-status">
-                <span class="status-dot"></span>
-                <span id="ip-display">[INTERROGATING...]</span>
+            <div class="nav-tabs">
+                <a href="#profile" class="nav-tab">Profile</a>
+                <a href="#projects" class="nav-tab active">Projects</a>
+                <a href="#contact" class="nav-tab">Contact</a>
             </div>
         </div>
     </nav>
 
     <div class="main-window">
-        <div class="window-header">
-            <div class="window-dots"><div class="window-dot red"></div><div class="window-dot yellow"></div><div class="window-dot green"></div></div>
-            <div class="window-title">system_manifest.v1</div>
-        </div>
-
-        <section style="text-align: center;">
+        <section class="init-hero">
             <div class="butterfly-container">
-                <div class="butterfly-icon">
-                    <img src="https://image.api.playstation.com/vulcan/ap/rnd/202310/0215/e8700940426f8d167946955a95b8d234d7d10e52b2f69a53.png" alt="DNA Butterfly" class="butterfly-image">
-                </div>
-                <p style="font-size: 10px; margin-top: 15px; color: var(--accent-gold); letter-spacing: 2px;">ADAPTIVE_DNA_PROTOCOL</p>
+                <img src="butterfly-dna.gif" alt="DNA Butterfly" class="butterfly-image">
+                <div class="breathing-status" style="font-size: 10px; color: var(--accent-gold); margin-top: 15px;">ADAPTIVE_DNA_PROTOCOL // ACTIVE</div>
             </div>
-            <h1 class="profile-name" style="font-size: 2rem; margin-bottom: 10px;">KWASI <span style="color: var(--accent-gold);">M. KONTOR</span></h1>
-            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 14px;">
+            <h1 style="font-size: 2rem;">KWASI <span style="color: var(--accent-gold);">M. KONTOR</span></h1>
+            <p style="color: var(--text-secondary); font-size: 14px; max-width: 600px; margin: 10px auto;">
                 U.S. Navy Veteran | Threat-Informed Defense | Adversary Emulation
             </p>
         </section>
 
-        <div class="section-divider">// PROJECTS & DEPLOYMENTS //</div>
+        <section id="projects" class="project-card">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: var(--accent-gold);">KATALEYA</h2>
+                <p style="font-size: 12px; color: var(--text-secondary);">Privacy-First Recovery Support Mobile App</p>
+            </div>
 
-        <section id="projects">
-            <div class="project-card">
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <h2 style="color: var(--accent-gold);">KATALEYA</h2>
-                    <p style="font-size: 12px; color: var(--text-secondary);">Privacy-First Recovery Support</p>
+            <div class="video-wrapper">
+                <video autoplay muted loop playsinline controls>
+                    <source src="katas.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="grid-2">
+                <div class="info-box">
+                    <h4 style="color: var(--accent-gold); margin-bottom: 10px;">TECHNICAL ARCHITECTURE</h4>
+                    <p>React Native / Expo 54. Three-vault privacy architecture. E2E encrypted messaging via X25519.</p>
                 </div>
-
-                <div class="video-wrapper">
-                    <video autoplay muted loop playsinline controls>
-                        <source src="your-video-file.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-
-                <div class="grid-2">
-                    <div class="info-box">
-                        <h4 style="color: var(--accent-gold); margin-bottom: 10px; font-size: 11px;">TECHNICAL ARCHITECTURE</h4>
-                        <p>React Native / Expo 54. Three-vault privacy (Surface/Sanctuary/Fortress). E2E encrypted messaging via X25519. Zero-knowledge local ML engine.</p>
-                    </div>
-                    <div class="info-box" style="border-left-color: var(--accent-sage);">
-                        <h4 style="color: var(--accent-sage); margin-bottom: 10px; font-size: 11px;">HUMAN OBJECTIVE</h4>
-                        <p>A digital sanctuary for recovery. Circadian-aware UI that shifts with your natural rhythm. Privacy is the foundation, support is the goal.</p>
-                    </div>
+                <div class="info-box" style="border-left-color: var(--accent-sage);">
+                    <h4 style="color: var(--accent-sage); margin-bottom: 10px;">HUMAN OBJECTIVE</h4>
+                    <p>A digital sanctuary for recovery. Circadian-aware UI that shifts with your natural rhythm.</p>
                 </div>
             </div>
         </section>
 
-        <div class="window-header" style="border-top: 1px solid var(--border-subtle); border-bottom: none; justify-content: space-between;">
-            <div style="font-size: 9px; color: var(--accent-sage);" class="breathing">● BIOMETRIC_FEED_STABLE</div>
-            <div style="font-size: 9px; color: var(--text-secondary);">© 2026 // KMK</div>
-        </div>
+        <section id="contact" style="padding: 40px; text-align: center;">
+            <p style="font-size: 11px; color: var(--text-secondary);">SIGNAL_CHANNEL: stormdesk57@gmail.com</p>
+        </section>
     </div>
-
-    <script>
-        async function getIP() {
-            try {
-                const res = await fetch('https://api.ipify.org?format=json');
-                const data = await res.json();
-                document.getElementById('ip-display').innerText = `[TARGET_IP: ${data.ip}]`;
-            } catch (e) {
-                document.getElementById('ip-display').innerText = "[STEALTH_ACTIVE]";
-            }
-        }
-        getIP();
-    </script>
 </body>
 </html>

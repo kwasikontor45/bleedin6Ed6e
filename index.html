@@ -3,237 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K. KONTOR // CONTEXT_AWARE_DEFENSE</title>
+    <title>K. KONTOR // AMOR FATI</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=JetBrains+Mono:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Outfit:wght@300;600;900&display=swap');
 
         :root {
-            --void-black: #05070a;
-            --hull-gray: rgba(18, 22, 28, 0.9);
-            --neon-amber: #ffb300;
-            --data-blue: #00f2ff;
-            --text-main: #e2e8f0;
-            --text-dim: #94a3b8;
-            --glass-border: rgba(255, 179, 0, 0.2);
+            --void: #010204;
+            --hull: rgba(10, 12, 16, 0.95);
+            --amber: #d4a373; /* Muted Bronze/Amber for humbler feel */
+            --cyan: #64d2ff;
+            --glass-border: rgba(212, 163, 115, 0.15);
+            --text-main: #d1d5db;
+            --text-dim: #6b7280;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
-            background-color: var(--void-black);
+            background: var(--void);
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.5;
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
             overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 50%, #10141d 0%, #05070a 100%);
+            background-image: radial-gradient(circle at 50% 10%, #0d1117 0%, #010204 100%);
         }
 
-        code, .mono { font-family: 'JetBrains Mono', monospace; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
 
-        /* --- ANIMATIONS --- */
-        @keyframes pulse-slow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-        @keyframes scan-y { 0% { top: 0%; } 100% { top: 100%; } }
-
-        /* --- LAYOUT --- */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .glass-card {
-            background: var(--hull-gray);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 4px;
-            padding: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glass-card::after {
-            content: "";
-            position: absolute;
-            left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-amber), transparent);
-            opacity: 0.1;
-            animation: scan-y 8s linear infinite;
-        }
-
-        /* --- HEADER --- */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--glass-border);
-            margin-bottom: 40px;
-        }
-
-        .logo { font-weight: 700; letter-spacing: 2px; color: var(--neon-amber); font-size: 0.9rem; }
+        /* --- SUBTLE BIOLOGY --- */
+        @keyframes rotate-subtle { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
         
-        /* --- HERO --- */
-        .hero {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .core-visual {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 20px;
-            border: 1px solid var(--neon-amber);
-            border-radius: 50%;
+        .hero-visual {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 60px auto 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
-            box-shadow: 0 0 30px rgba(255, 179, 0, 0.1);
         }
 
-        .core-visual img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: brightness(1.1) contrast(1.1);
+        .loop-border {
+            position: absolute;
+            width: 100%; height: 100%;
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid var(--amber);
+            border-radius: 50%;
+            animation: rotate-subtle 30s linear infinite;
         }
 
-        h1 {
-            font-size: 2rem;
-            letter-spacing: -0.02em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .subheadline {
-            font-size: 0.8rem;
-            color: var(--neon-amber);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        /* --- GRID --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .label {
-            font-family: 'JetBrains Mono';
-            font-size: 10px;
-            color: var(--data-blue);
-            text-transform: uppercase;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        /* --- VIDEO --- */
-        .video-container {
-            width: 100%;
-            background: #000;
-            border-radius: 4px;
-            margin-top: 15px;
+        .core-dna {
+            width: 120px; height: 120px;
+            border-radius: 50%;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            filter: grayscale(0.4) contrast(1.1);
         }
 
-        video { width: 100%; display: block; opacity: 0.9; }
-
-        /* --- MOBILE OPTIMIZATION --- */
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            h1 { font-size: 1.5rem; }
-            .container { padding: 15px; }
-            .glass-card { padding: 20px; }
-        }
-
-        .skull-accent { color: var(--neon-amber); animation: pulse-slow 2s infinite; }
+        /* --- THE GRID --- */
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
         
-        footer {
-            margin-top: 60px;
-            padding: 20px 0;
-            border-top: 1px solid var(--glass-border);
+        .panel {
+            background: var(--hull);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: border 0.3s;
+        }
+        .panel:hover { border-color: rgba(212, 163, 115, 0.4); }
+
+        .tag-sm {
             font-family: 'JetBrains Mono';
-            font-size: 10px;
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-dim);
+            font-size: 9px;
+            color: var(--amber);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        h1 { font-weight: 900; font-size: 2.2rem; letter-spacing: -0.5px; margin-bottom: 8px; color: #fff; }
+        .quote { font-size: 14px; color: var(--text-dim); font-style: italic; max-width: 600px; margin: 0 auto 40px; }
+
+        .data-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+
+        .video-wrapper { 
+            width: 100%; border: 1px solid rgba(255,255,255,0.05); 
+            background: #000; border-radius: 2px; margin-top: 10px;
+        }
+        video { width: 100%; display: block; opacity: 0.8; }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .data-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 1.8rem; }
+        }
+
+        .link-btn {
+            display: inline-block; padding: 6px 12px; border: 1px solid var(--glass-border);
+            color: var(--text-main); text-decoration: none; font-size: 10px;
+            margin-right: 8px; margin-top: 10px; font-family: 'JetBrains Mono';
+        }
+        .link-btn:hover { background: var(--amber); color: var(--void); }
+
+        footer {
+            margin-top: 40px; padding: 30px 0; border-top: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; font-size: 10px; 
+            color: var(--text-dim); font-family: 'JetBrains Mono';
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <header>
-            <div class="logo mono">K. KONTOR // PROTOCOL_V3</div>
-            <div class="mono" style="font-size: 10px; color: var(--data-blue);">
-                [ STATUS: OPERATIONAL ]
-            </div>
+        <header style="padding: 15px 0; display: flex; justify-content: space-between; border-bottom: 1px solid var(--glass-border); margin-bottom: 40px;">
+            <div class="mono" style="font-size: 10px; color: var(--text-dim);">SYSTEM: ARCHITECTURE_LOGS</div>
+            <div class="mono" style="font-size: 10px; color: var(--amber);">[ STATE: ADAPTIVE_HANDSHAKE ]</div>
         </header>
 
-        <section class="hero">
-            <div class="core-visual">
-                <img src="butterfly-dna.gif" alt="Core Sequence">
+        <section style="text-align: center;">
+            <div class="hero-visual">
+                <div class="loop-border"></div>
+                <div class="core-dna">
+                    <img src="butterfly-dna.gif" style="width:100%; height:100%; object-fit:cover;" alt="Core Logic">
+                </div>
             </div>
-            <span class="subheadline">Amor Fati // Conscious Iteration</span>
+            
             <h1>Kwasi M. Kontor</h1>
-            <p style="color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 14px;">
-                <strong>USN 2017-2022 Shellback</strong> <span class="skull-accent">☠️</span> <br>
-                Architecture enthusiast. Focused on context-aware strategies and practical defensive measures within SOC environments through hands-on labs and active research.
+            <p class="quote">
+                "Amor Fati: Life rewritten by choice, sharpened through endless cycles."
             </p>
+
+            <div class="panel" style="text-align: left; margin-top: 20px;">
+                <span class="tag-sm">Primary Designation</span>
+                <p style="font-size: 15px; color: #fff;">
+                    <strong>USN 2017-2022 Shellback</strong> ☠️ <br>
+                    Architecture enthusiast. Focused on context-aware strategies and practical defensive measures within SOC environments through hands-on labs and active research.
+                </p>
+            </div>
         </section>
 
-        <div class="grid">
-            <div class="glass-card">
-                <span class="label">System Designation</span>
-                <p style="font-size: 14px;">Mastering the indifference of the void through system integrity. Every cycle is a conscious choice to re-enter, sharpened.</p>
-            </div>
-
-            <div class="glass-card">
-                <span class="label">Node Stats</span>
-                <div class="mono" style="font-size: 11px; line-height: 2;">
-                    <div style="display:flex; justify-content:space-between"><span>DEPTH:</span> <span style="color:var(--neon-amber)">DEEP SPACE / L.A.</span></div>
-                    <div style="display:flex; justify-content:space-between"><span>VOID_RESISTANCE:</span> <span style="color:var(--neon-amber)">HIGH</span></div>
-                    <div style="display:flex; justify-content:space-between"><span>ITERATION:</span> <span style="color:var(--neon-amber)">402.STABLE</span></div>
+        <div class="data-grid">
+            <div class="panel">
+                <span class="tag-sm">Telemetry</span>
+                <div class="mono" style="font-size: 11px;">
+                    SECTOR: <span style="color:var(--amber)">LOST & FOUND // LA-CA-1722</span><br>
+                    SIGNAL: <span style="color:var(--amber)">RE-ENTRY_SUCCESS</span><br>
+                    LOG: <span style="color:var(--amber)">CONTINUOUS_ITERATION</span>
                 </div>
             </div>
 
-            <div class="glass-card" style="grid-column: span 12;">
-                <span class="label">Project Uplink // KATALEYA</span>
-                <h3 style="margin-bottom: 10px;">Privacy-First Recovery Support</h3>
-                <p style="font-size: 13px; color: var(--text-dim);">Researching X25519 encryption and circadian-aware UI frameworks to protect human fragility within technological systems.</p>
-                <div class="video-container">
+            <div class="panel">
+                <span class="tag-sm">The Philosophy</span>
+                <p style="font-size: 13px; color: var(--text-dim);">The snake loops; the butterfly is what the loop is for. Each cycle is a choice to endure and sharpen the wings.</p>
+            </div>
+
+            <div class="panel" style="grid-column: span 12; padding: 0;">
+                <div style="padding: 25px;">
+                    <span class="tag-sm">Active Lab // KATALEYA</span>
+                    <h3 style="margin-bottom: 8px;">Privacy-First Recovery Sanctuary</h3>
+                    <p style="font-size: 13px; color: var(--text-dim);">An exercise in protecting human fragility through technical mastery. Built with X25519 encryption and circadian-rhythm UI.</p>
+                </div>
+                <div class="video-wrapper">
                     <video autoplay muted loop playsinline controls>
                         <source src="katas.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
 
-            <div class="glass-card">
-                <span class="label">SOC Lab Logs</span>
-                <ul class="mono" style="font-size: 11px; color: var(--text-dim); list-style: none;">
-                    <li>> Azure Hardening</li>
-                    <li>> Telemetry Analysis</li>
-                    <li>> Splunk Cloud Ingest</li>
-                </ul>
+            <div class="panel">
+                <span class="tag-sm">Validated Uplinks</span>
+                <div class="mono">
+                    <a href="https://www.credly.com/users/kwasi-kontor/badges" target="_blank" class="link-btn">CREDLY_MANIFEST</a>
+                    <a href="https://github.com/kwasikontor45" target="_blank" class="link-btn">GITHUB_SRC</a>
+                    <p style="font-size: 9px; margin-top: 15px; color: var(--text-dim);">
+                        ◈ GUARD CARD // CA_VALIDATED<br>◈ COMPTIA // STACKED
+                    </p>
+                </div>
             </div>
 
-            <div class="glass-card">
-                <span class="label">Communication</span>
+            <div class="panel">
+                <span class="tag-sm">Signal Channel</span>
                 <div class="mono" style="font-size: 11px;">
-                    <a href="mailto:stormdesk57@gmail.com" style="color: var(--neon-amber); text-decoration:none;">[MAIL] stormdesk57@gmail.com</a><br>
-                    <a href="https://github.com/kwasikontor45" target="_blank" style="color: var(--neon-amber); text-decoration:none;">[ROOT] GITHUB_UPLINK</a>
+                    [MAIL]: <a href="mailto:stormdesk57@gmail.com" style="color: var(--amber); text-decoration:none;">stormdesk57@gmail.com</a>
                 </div>
             </div>
         </div>
 
         <footer>
-            <div id="radar-output">SCANNING VOID...</div>
-            <div>AMOR FATI // ☠️ // 2017-2022</div>
+            <div id="radar-output">INITIATING WELCOME PROTOCOL...</div>
+            <div class="mono">AMOR FATI // ☠️ // 2017-2022</div>
         </footer>
     </div>
 
@@ -243,9 +204,9 @@
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
-                radar.innerHTML = `GREETINGS <span class="skull-accent">☠️</span> TARGET_ON_RADAR: [${data.ip}]`;
+                radar.innerHTML = `WELCOME, HONORED GUEST. LOCAL_RADAR: [${data.ip}] <span style="animation: breathe 2s infinite">💀</span>`;
             } catch (e) {
-                radar.innerText = "RADAR_STEALTH_MODE";
+                radar.innerText = "RADAR_STEALTH_ACTIVE";
             }
         }
         engageRadar();

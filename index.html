@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KWASI M. KONTOR // TECH DEFENSE STUDENT</title>
+    <title>KWASI M. KONTOR // >_ </title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap');
 
@@ -14,6 +14,7 @@
             --accent-gold: #d4a373;
             --accent-sage: #87a878;
             --accent-blue: #6b9dc7;
+            --accent-red: #e07a5f;
             --text-primary: #e8e8e8;
             --text-secondary: #94a3b8;
             --border-subtle: rgba(212, 163, 115, 0.2);
@@ -26,67 +27,96 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- ANIMATIONS (Clean & Minimal) --- */
+        /* --- ANIMATION ENGINE --- */
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        
         @keyframes natural-breath {
-            0%, 100% { opacity: 0.8; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.02); text-shadow: 0 0 10px var(--accent-sage); }
+            0%, 100% { opacity: 0.8; transform: scale(1); text-shadow: 0 0 2px var(--accent-sage); }
+            50% { opacity: 1; transform: scale(1.02); text-shadow: 0 0 12px var(--accent-sage); }
         }
+
+        @keyframes skull-pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px var(--accent-red)); opacity: 1; }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 10px var(--accent-red)); opacity: 0.8; }
+        }
+
         @keyframes bio-pulse {
             0%, 100% { border-color: var(--border-subtle); box-shadow: 0 0 15px rgba(212, 163, 115, 0.1); }
             50% { border-color: var(--accent-sage); box-shadow: 0 0 25px rgba(135, 168, 120, 0.2); }
         }
 
-        /* --- UI --- */
+        /* --- UI OVERLAYS --- */
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%);
+            background-size: 100% 4px; pointer-events: none; z-index: 1000; opacity: 0.1;
+        }
+
+        /* --- NAVIGATION --- */
         .nav-container {
             position: fixed; top: 0; width: 100%; z-index: 100;
             background: rgba(10, 14, 26, 0.95); backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-subtle);
         }
         .nav-inner {
-            max-width: 1200px; margin: 0 auto; height: 60px;
-            display: flex; justify-content: space-between; align-items: center; padding: 0 20px;
+            max-width: 1300px; margin: 0 auto; height: 60px;
+            display: flex; justify-content: space-between; align-items: center; padding: 0 40px;
         }
         .logo { font-weight: 700; color: var(--accent-gold); text-decoration: none; font-size: 0.9rem; }
-        .nav-tab { color: var(--text-secondary); text-decoration: none; font-size: 10px; text-transform: uppercase; padding: 10px; }
+        .cursor { animation: blink 1s infinite; color: var(--accent-gold); }
 
         .main-window {
             max-width: 1100px; margin: 100px auto 40px;
             background: var(--bg-card); border: 1px solid var(--border-subtle);
-            border-radius: 12px; overflow: hidden;
+            border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
 
         /* --- HERO --- */
         .hero { padding: 60px 20px; text-align: center; }
         .butterfly-box {
-            width: 180px; height: 180px; margin: 0 auto 30px;
-            border-radius: 40px; border: 2px solid var(--border-subtle);
+            width: 190px; height: 190px; margin: 0 auto 30px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            border: 2px solid var(--border-subtle);
             display: flex; align-items: center; justify-content: center;
             animation: bio-pulse 5s infinite; overflow: hidden;
         }
-        .butterfly-img { width: 130px; height: auto; }
+        .butterfly-img { width: 140px; height: auto; }
 
-        /* --- SECTIONS --- */
-        .section-header { text-align: center; margin-bottom: 30px; }
+        .skull-icon { display: inline-block; animation: skull-pulse 3s infinite; margin: 0 10px; }
+        .breathing-text { animation: natural-breath 4s infinite; color: var(--accent-sage); display: inline-block; }
+
+        /* --- CONTENT --- */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 40px 40px; }
-        .card { background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); padding: 20px; border-radius: 8px; }
-        
+        .card { 
+            background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); 
+            padding: 25px; border-radius: 8px; border-left: 4px solid var(--accent-gold);
+        }
+        .data-row { display: flex; justify-content: space-between; font-size: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+        /* --- VIDEO --- */
         .video-box {
-            max-width: 800px; margin: 0 auto 30px; border-radius: 12px;
-            overflow: hidden; border: 1px solid var(--border-subtle);
+            max-width: 850px; margin: 0 auto 40px; border-radius: 12px;
+            overflow: hidden; border: 1px solid var(--border-subtle); background: #000;
         }
         .video-box video { width: 100%; display: block; }
 
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; padding: 0 20px 20px; } }
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; padding: 0 20px 20px; }
+            .nav-inner { padding: 0 20px; }
+        }
     </style>
 </head>
 <body>
+    <div class="scanlines"></div>
+
     <nav class="nav-container">
         <div class="nav-inner">
-            <a href="#" class="logo">KMK // LAB_LOGS</a>
-            <div style="font-size: 10px; color: var(--accent-blue);">
-                [CONNECTION: <span id="ip-status">VERIFYING</span>]
+            <a href="#" class="logo">KMK ..: >_ <span class="cursor">_</span> :..</a>
+            <div style="font-size: 10px; color: var(--text-muted);">
+                <span id="conn-text">VERIFYING_NODE</span> <span id="ip-display" style="color:var(--accent-amber)"></span>
             </div>
         </div>
     </nav>
@@ -96,76 +126,95 @@
             <div class="butterfly-box">
                 <img src="butterfly-dna.gif" alt="Bio Logic" class="butterfly-img">
             </div>
-            <p style="font-size: 10px; color: var(--accent-sage); letter-spacing: 2px; animation: natural-breath 4s infinite;">SYSTEM_INIT // LEARNING_MODE</p>
-            <h1 style="margin: 15px 0; letter-spacing: 1px;">KWASI <span style="color: var(--accent-gold);">M. KONTOR</span></h1>
-            <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-size: 14px;">
-                <strong>U.S. Navy Veteran (Shellback)</strong> | Cybersecurity & Cloud Engineering Student. Focused on the technical hardening of cloud-native infrastructure and building resilient SOC environments through hands-on labs and active research.
+            <div class="breathing-text" style="font-size: 10px; letter-spacing: 3px;">SYSTEM_INIT // LEARNING_MODE</div>
+            
+            <h1 style="margin: 20px 0; letter-spacing: 2px;">KWASI <span style="color: var(--accent-gold);">M. KONTOR</span></h1>
+            
+            <p style="color: var(--text-secondary); max-width: 750px; margin: 0 auto; font-size: 14px; line-height: 1.8;">
+                <strong>USN 2017-2022 Shellback</strong> | Architecture enthusiast. Focused on context-aware strategies and practical applications in SOC environments through hands-on labs and active research.
             </p>
-            <div style="margin-top: 25px; font-size: 12px; color: var(--accent-blue);">
-                ⚓ Shellback // Node Integrity: Stable ⚓
+
+            <div style="margin-top: 30px; font-size: 14px;">
+                ⚓ Shellback // ..: <span class="skull-icon">💀</span> :.. \Node_Integrity_Stable ⚓
             </div>
         </section>
 
         <div class="grid">
-            <div class="card" style="border-left: 3px solid var(--accent-gold);">
-                <h4 style="font-size: 11px; margin-bottom: 10px;">RESEARCH FOCUS</h4>
-                <p style="font-size: 12px; color: var(--text-secondary);">Exploring cloud security configurations, defensive telemetry analysis, and automated threat detection rules.</p>
+            <div class="card">
+                <div class="data-row"><span>Status</span><span class="breathing-text">BREATHING ..: :..</span></div>
+                <div class="data-row"><span>Focus</span><span style="color:var(--accent-gold)">TECH HARDENING</span></div>
+                <div class="data-row"><span>Environment</span><span style="color:var(--accent-gold)">AZURE / SPLUNK</span></div>
             </div>
-            <div class="card" style="border-left: 3px solid var(--accent-sage);">
-                <h4 style="font-size: 11px; margin-bottom: 10px;">VETERAN FOUNDATION</h4>
-                <p style="font-size: 12px; color: var(--text-secondary);">Leveraging USN experience with F/A-18 Super Hornet systems to apply precision and discipline to modern IT environments.</p>
+            <div class="card" style="border-left-color: var(--accent-sage);">
+                <div class="data-row"><span>Service</span><span style="color:var(--accent-sage)">USN 17-22</span></div>
+                <div class="data-row"><span>Designation</span><span style="color:var(--accent-sage)">SHELLBACK</span></div>
+                <div class="data-row"><span>Location</span><span style="color:var(--accent-sage)">LOS ANGELES NODE</span></div>
             </div>
         </div>
 
-        <section style="padding: 40px 0; border-top: 1px solid var(--border-subtle);">
-            <div class="section-header">
-                <h2 style="color: var(--accent-gold);">KATALEYA</h2>
-                <p style="font-size: 12px; color: var(--text-secondary);">Student Project: Privacy-First Recovery Support App</p>
+        <section id="kataleya" style="padding: 40px 0; border-top: 1px solid var(--border-subtle);">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: var(--accent-gold); letter-spacing: 2px;">KATALEYA</h2>
+                <p style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Privacy-Centric Digital Resilience Project</p>
             </div>
+            
             <div class="video-box">
                 <video autoplay muted loop playsinline controls>
                     <source src="katas.mp4" type="video/mp4">
                 </video>
             </div>
+
             <div class="grid">
                 <div class="card">
-                    <p style="font-size: 12px;"><strong>Build:</strong> React Native / Expo. Exploring end-to-end encryption (X25519) and circadian-rhythm UI design.</p>
+                    <h4 style="font-size: 11px; color: var(--accent-gold); margin-bottom: 10px;">STUDENT RESEARCH</h4>
+                    <p style="font-size: 12px; color: var(--text-secondary);">Exploring end-to-end encryption (X25519) and local-first data integrity within a React Native ecosystem.</p>
                 </div>
-                <div class="card">
-                    <p style="font-size: 12px;"><strong>Goal:</strong> Creating a zero-knowledge sanctuary for personal health data using local-first processing.</p>
+                <div class="card" style="border-left-color: var(--accent-sage);">
+                    <h4 style="font-size: 11px; color: var(--accent-sage); margin-bottom: 10px;">HUMAN LOGIC</h4>
+                    <p style="font-size: 12px; color: var(--text-secondary);">A private sanctuary for recovery. Integrating circadian-aware UI to align digital interaction with biological rhythms.</p>
                 </div>
             </div>
         </section>
 
         <section style="padding: 40px; border-top: 1px solid var(--border-subtle);">
-            <h3 style="font-size: 16px; margin-bottom: 20px;">Blue Team SOC Lab (Work in Progress)</h3>
+            <h3 style="font-size: 16px; margin-bottom: 25px; letter-spacing: 1px;">Blue Team SOC Lab ..: <span style="color:var(--accent-sage)">OPERATIONAL</span> :..</h3>
             <ul style="font-size: 13px; color: var(--text-secondary); list-style: none;">
-                <li style="margin-bottom: 10px;">◈ Learning to ingest telemetry from Windows/Ubuntu nodes into Splunk Cloud.</li>
-                <li style="margin-bottom: 10px;">◈ Testing NextDNS and Azure security configurations for lab protection.</li>
-                <li style="margin-bottom: 10px;">◈ Documenting detection signatures for common lab-simulated events.</li>
+                <li style="margin-bottom: 12px;">◈ Learning to ingest telemetry from Windows/Ubuntu nodes into Splunk Cloud.</li>
+                <li style="margin-bottom: 12px;">◈ Testing NextDNS and Azure security configurations for lab protection.</li>
+                <li style="margin-bottom: 12px;">◈ Documenting detection signatures for common lab-simulated events.</li>
             </ul>
         </section>
 
-        <section style="padding: 40px; background: rgba(0,0,0,0.1); text-align: center;">
-            <p style="font-size: 12px; margin-bottom: 15px;">Connect & Collaborate</p>
-            <div style="display: flex; justify-content: center; gap: 20px; font-size: 11px;">
-                <a href="mailto:stormdesk57@gmail.com" style="color: var(--accent-gold);">EMAIL</a>
-                <a href="https://www.credly.com/users/kwasi-kontor/badges" target="_blank" style="color: var(--accent-sage);">CERTIFICATIONS</a>
-                <a href="https://github.com/kwasikontor45" target="_blank" style="color: var(--accent-gold);">GITHUB</a>
+        <section style="padding: 60px 40px; border-top: 1px solid var(--border-subtle); text-align: center;">
+            <div class="card" style="max-width: 500px; margin: 0 auto; border-left: none; border-top: 3px solid var(--accent-gold);">
+                <div class="data-row"><span>Signal</span><span>stormdesk57@gmail.com</span></div>
+                <div class="data-row"><span>Verifications</span><span><a href="https://www.credly.com/users/kwasi-kontor/badges" target="_blank" style="color: var(--accent-sage); text-decoration: none;">CREDLY ✓</a></span></div>
+                <div class="data-row"><span>Source</span><span><a href="https://github.com/kwasikontor45" target="_blank" style="color: var(--accent-gold); text-decoration: none;">GITHUB</a></span></div>
             </div>
         </section>
+
+        <div style="padding: 20px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2);">
+            <div style="font-size: 10px; color: var(--text-muted);">
+                NODE_HEALTH: STABLE <span class="skull-icon" style="font-size: 8px;">💀</span>
+            </div>
+            <div style="font-size: 10px; color: var(--text-muted); letter-spacing: 1px;">
+                KMK // USN VET // 2024
+            </div>
+        </div>
     </div>
 
     <script>
-        async function getStatus() {
-            const statusEl = document.getElementById('ip-status');
+        async function getIP() {
+            const statusEl = document.getElementById('conn-text');
+            const ipEl = document.getElementById('ip-display');
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
-                statusEl.innerText = `ACTIVE: ${data.ip}`;
-            } catch (e) { statusEl.innerText = "STEALTH_ON"; }
+                statusEl.innerHTML = `HANDSHAKE_ESTABLISHED <span class="skull-icon" style="margin:0 5px">💀</span>`;
+                ipEl.innerText = `[${data.ip}]`;
+            } catch (e) { statusEl.innerText = "STEALTH_PROTOCOL_ACTIVE"; }
         }
-        getStatus();
+        getIP();
     </script>
 </body>
 </html>

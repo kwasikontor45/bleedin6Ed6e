@@ -280,7 +280,7 @@
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
-                statusEl.innerHTML = `TARGET ANALYZED. VERIFYING CONNECTION <span class="skull-center">💀</span> ..: :..`;
+                statusEl.innerHTML = `PROTOCOL ANALYSIS:--- <span class="skull-center">💀</span> ..: :..`;
                 ipEl.innerText = `[${data.ip}]`;
             } catch (e) { statusEl.innerText = "STEALTH_PROTOCOL_ACTIVE ..: :.."; }
         }

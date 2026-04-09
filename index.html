@@ -54,6 +54,8 @@
             100% { transform: translateY(0); opacity: 0.8; }
         }
         @keyframes heart-flow { to { stroke-dashoffset: 0; } }
+        
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         /* --- UI ELEMENTS --- */
         .scanlines {
@@ -88,18 +90,21 @@
             width: 200px; height: 200px; margin: 40px auto;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             border: 2px solid var(--border-subtle); display: flex; align-items: center; justify-content: center;
-            animation: bio-pulse 4s ease-in-out infinite; overflow: hidden;
+            animation: bio-pulse 4s ease-in-out infinite; overflow: hidden; transition: 0.5s;
         }
-        .butterfly-image { width: 140px; height: auto; }
-        .breathing-text { animation: natural-breath 4s ease-in-out infinite; color: var(--accent-sage); }
+        .butterfly-icon:hover { border-radius: 50%; transform: scale(1.05); border-color: var(--accent-gold); }
+        .butterfly-image { width: 140px; height: auto; filter: drop-shadow(0 0 8px rgba(212, 163, 115, 0.5)); }
+        .breathing-text { animation: natural-breath 4s ease-in-out infinite; color: var(--accent-sage); display: inline-block; }
 
         /* --- GRIDS & CARDS --- */
         .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 40px; }
         .info-card { 
             background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); 
-            border-radius: 8px; padding: 25px; border-left: 4px solid var(--accent-gold);
+            border-radius: 8px; padding: 25px; border-left: 4px solid var(--accent-gold); position: relative;
         }
-        .data-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .data-row { display: flex; justify-content: space-between; font-size: 13px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .data-label { color: var(--text-secondary); }
+        .data-value { color: var(--accent-gold); font-weight: 600; }
 
         /* --- VIDEO --- */
         .video-wrapper {
@@ -108,6 +113,11 @@
             background: #000; box-shadow: 0 0 30px rgba(0,0,0,0.5);
         }
         .video-wrapper video { width: 100%; display: block; }
+
+        /* --- LINKS --- */
+        .verified-link { color: var(--accent-sage) !important; text-decoration: none; transition: 0.3s; }
+        .verified-link:hover { text-shadow: 0 0 8px var(--accent-sage); color: var(--accent-amber) !important; }
+        .verified-link::after { content: ' ✓'; font-size: 10px; opacity: 0.7; animation: pulse 2s infinite; }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 850px) {
@@ -156,15 +166,15 @@
 
         <section id="capabilities" class="content-grid">
             <div class="info-card">
-                <div class="data-row"><span>Objective</span><span style="color:var(--accent-gold)">THREAT DEFENSE</span></div>
-                <div class="data-row"><span>Logic</span><span style="color:var(--accent-gold)">ADVERSARY EMULATION</span></div>
-                <div class="data-row"><span>Active Response</span><span style="color:var(--accent-gold)">BLUE TEAM SOC</span></div>
-                <div class="data-row"><span>Status</span><span class="breathing-text">BREATHING ..: :..</span></div>
+                <div class="data-row"><span class="data-label">Primary Objective</span><span class="data-value">THREAT-INFORMED DEFENSE</span></div>
+                <div class="data-row"><span class="data-label">Intelligence Logic</span><span class="data-value">ADVERSARY EMULATION</span></div>
+                <div class="data-row"><span class="data-label">Active Response</span><span class="data-value">BLUE TEAM SOC</span></div>
+                <div class="data-row"><span class="data-label">Status</span><span class="breathing-text">BREATHING ..: :..</span></div>
             </div>
             <div class="info-card" style="border-left-color: var(--accent-sage);">
-                <div class="data-row"><span>Tactical</span><span style="color:var(--accent-sage)">USN VETERAN</span></div>
-                <div class="data-row"><span>System</span><span style="color:var(--accent-sage)">F/A-18 SUPER HORNET</span></div>
-                <div class="data-row"><span>Node</span><span style="color:var(--accent-sage)">LOS ANGELES</span></div>
+                <div class="data-row"><span class="data-label">Tactical Leadership</span><span class="data-value">USN VETERAN</span></div>
+                <div class="data-row"><span class="data-label">System Integrity</span><span class="data-value">F/A-18 SUPER HORNET</span></div>
+                <div class="data-row"><span class="data-label">Location</span><span class="data-value">LOS ANGELES NODE</span></div>
             </div>
         </section>
 
@@ -182,11 +192,11 @@
 
             <div class="content-grid" style="padding: 0; margin-bottom: 40px;">
                 <div class="info-card">
-                    <h4 style="font-size: 11px; margin-bottom: 10px; color: var(--accent-gold);">TECHNICAL ARCHITECTURE</h4>
-                    <p style="font-size: 12px; color: var(--text-secondary);">React Native / Expo 54. Three-vault privacy architecture. E2E encrypted messaging via X25519/XSalsa20-Poly1305. Local ML-powered insights.</p>
+                    <h4 style="font-size: 11px; margin-bottom: 10px; color: var(--accent-gold); text-transform: uppercase;">Technical Architecture</h4>
+                    <p style="font-size: 12px; color: var(--text-secondary);">React Native / Expo 54. Three-vault privacy architecture. E2E encrypted messaging via X25519/XSalsa20-Poly1305. Local ML-powered insights engine.</p>
                 </div>
                 <div class="info-card" style="border-left-color: var(--accent-sage);">
-                    <h4 style="font-size: 11px; margin-bottom: 10px; color: var(--accent-sage);">HUMAN OBJECTIVE</h4>
+                    <h4 style="font-size: 11px; margin-bottom: 10px; color: var(--accent-sage); text-transform: uppercase;">Human Objective</h4>
                     <p style="font-size: 12px; color: var(--text-secondary);">A digital sanctuary for recovery. Circadian-aware UI that shifts with your natural rhythm. Health data never leaves the device.</p>
                 </div>
             </div>
@@ -194,43 +204,72 @@
             <div style="background: rgba(10, 14, 26, 0.8); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 40px;">
                 <h3 style="text-align: center; font-size: 12px; color: var(--text-secondary); margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase;">The State Engine Workflow</h3>
                 <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
-                    <div style="border: 1px solid var(--accent-sage); padding: 15px; border-radius: 8px; width: 140px;">BODY<br><small>circadian • urge</small></div>
-                    <div style="border: 1px solid #b8a8d8; padding: 15px; border-radius: 8px; width: 140px;">MIND<br><small>mood • journal</small></div>
-                    <div style="border: 1px solid var(--accent-gold); padding: 15px; border-radius: 8px; width: 140px;">SOUL<br><small>breath • ritual</small></div>
+                    <div style="background: rgba(135, 168, 120, 0.1); border: 1px solid var(--accent-sage); padding: 15px; border-radius: 8px; width: 140px;">
+                        <div style="color: var(--accent-sage); font-weight: 600; font-size: 12px;">BODY</div>
+                        <div style="color: rgba(255,255,255,0.6); font-size: 10px;">circadian • urge</div>
+                    </div>
+                    <div style="background: rgba(184, 168, 216, 0.1); border: 1px solid #b8a8d8; padding: 15px; border-radius: 8px; width: 140px;">
+                        <div style="color: #b8a8d8; font-weight: 600; font-size: 12px;">MIND</div>
+                        <div style="color: rgba(255,255,255,0.6); font-size: 10px;">mood • journal</div>
+                    </div>
+                    <div style="background: rgba(212, 163, 115, 0.1); border: 1px solid var(--accent-gold); padding: 15px; border-radius: 8px; width: 140px;">
+                        <div style="color: var(--accent-gold); font-weight: 600; font-size: 12px;">SOUL</div>
+                        <div style="color: rgba(255,255,255,0.6); font-size: 10px;">breath • ritual</div>
+                    </div>
                 </div>
-                <div style="text-align: center; color: var(--text-muted); margin: 20px 0;">↓</div>
-                <div style="border: 2px solid var(--accent-gold); max-width: 200px; margin: 0 auto; padding: 15px; text-align: center; border-radius: 10px;">STATE ENGINE</div>
-                <div style="text-align: center; color: var(--text-muted); margin: 20px 0;">↓</div>
+                <div style="text-align: center; color: var(--text-muted); font-size: 24px; margin: 20px 0;">↓</div>
+                <div style="background: rgba(58, 58, 74, 0.5); border: 2px solid var(--accent-gold); max-width: 200px; margin: 0 auto; padding: 15px; text-align: center; border-radius: 10px;">STATE ENGINE</div>
+                <div style="text-align: center; color: var(--text-muted); font-size: 24px; margin: 20px 0;">↓</div>
                 <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 10px;">
-                    <div style="color:var(--accent-red)">STRUGGLING</div>
-                    <div style="color:#6b9dc7">STABLE</div>
-                    <div style="color:var(--accent-sage)">THRIVING</div>
+                    <div style="color:var(--accent-red); font-weight: 600;">STRUGGLING</div>
+                    <div style="color:#6b9dc7; font-weight: 600;">STABLE</div>
+                    <div style="color:var(--accent-sage); font-weight: 600;">THRIVING</div>
                 </div>
-                <p style="font-size: 12px; font-style: italic; color: var(--text-secondary); text-align: center; margin-top: 30px;">
-                    Personal Note: Kataleya is my most proud project – built with care, iteration by iteration.
-                </p>
+                <div style="background: rgba(212, 163, 115, 0.05); border-left: 3px solid var(--accent-gold); padding: 15px 20px; border-radius: 0 8px 8px 0; margin-top: 30px;">
+                    <p style="color: var(--text-secondary); font-size: 12px; font-style: italic;">Personal Note: Kataleya is my most proud project – built with care, iteration by iteration.</p>
+                </div>
             </div>
         </section>
 
         <section class="project-card" style="padding: 40px; border-top: 1px solid var(--border-subtle);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-                <h2 style="font-size: 20px;">Blue Team SOC Home Lab</h2>
+                <h2 style="font-size: 20px; letter-spacing: 1px;">Blue Team SOC Home Lab</h2>
                 <span style="background: rgba(135, 168, 120, 0.2); border: 1px solid var(--accent-sage); color: var(--accent-sage); padding: 4px 12px; border-radius: 4px; font-size: 10px;">ACTIVE</span>
             </div>
-            <ul style="font-size: 13px; color: var(--text-secondary); list-style: none;">
-                <li style="margin-bottom: 12px;">◆ Built cloud-native SOC using Splunk Cloud, Azure, and NextDNS</li>
-                <li style="margin-bottom: 12px;">◆ Deployed Ubuntu honeypot and Windows Server 2022 VMs with Sysmon</li>
-                <li style="margin-bottom: 12px;">◆ Developed 9 detection rules for DNS tunneling, brute force, and credential dumping</li>
-                <li style="margin-bottom: 12px;">◆ Automated security data pipeline with Splunk Universal Forwarder over SSL</li>
+            <ul style="font-size: 13px; color: var(--text-secondary); list-style: none; margin-bottom: 25px;">
+                <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-gold);">◆</span> Built cloud-native SOC using Splunk Cloud, Azure, and NextDNS</li>
+                <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-gold);">◆</span> Deployed Ubuntu honeypot and Windows Server 2022 VMs with Sysmon</li>
+                <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-gold);">◆</span> Developed 9 detection rules for DNS tunneling, brute force, and credential dumping</li>
+                <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-gold);">◆</span> Automated security data pipeline with Splunk Universal Forwarder over SSL</li>
             </ul>
+            <div style="background: rgba(212, 163, 115, 0.05); border-left: 3px solid var(--accent-gold); padding: 15px 20px; border-radius: 0 8px 8px 0;">
+                <p style="color: var(--text-secondary); font-size: 12px; font-style: italic;">Note: Building real-world skills through hands-on experimentation.</p>
+            </div>
+        </section>
+
+        <section id="contact" style="padding: 60px 40px; border-top: 1px solid var(--border-subtle);">
+            <div class="info-card" style="max-width: 550px; margin: 0 auto; border-left: none; border-top: 4px solid var(--accent-gold);">
+                <div class="data-row">
+                    <span class="data-label">Signal</span>
+                    <span class="data-value"><a href="mailto:stormdesk57@gmail.com" style="color: var(--accent-gold); text-decoration: none;">stormdesk57@gmail.com</a></span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Credentials</span>
+                    <span class="data-value"><a href="https://www.credly.com/users/kwasi-kontor/badges" target="_blank" class="verified-link">CREDLY_VERIFIED</a></span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Source</span>
+                    <span class="data-value"><a href="https://github.com/kwasikontor45" target="_blank" style="color: var(--accent-gold); text-decoration: none;">github.com/kwasikontor45</a></span>
+                </div>
+            </div>
         </section>
 
         <div class="footer-status" style="padding: 20px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 10px;">
                 <svg width="50" height="20"><path class="heartbeat-path" d="M0,10 L10,10 L12,5 L15,15 L18,10 L50,10" /></svg>
-                <span style="font-size: 10px;">BIOMETRIC FEED: STABLE ..: :..</span>
+                <span style="font-size: 10px; color: var(--text-muted);">BIOMETRIC FEED: STABLE ..: :..</span>
             </div>
-            <div style="font-size: 10px; animation: footer-slide 3s infinite;">KMK // THREAT_INFORMED_DEFENSE // 2024</div>
+            <div style="font-size: 10px; animation: footer-slide 3s infinite; color: var(--text-muted); letter-spacing: 1px;">KMK // THREAT_INFORMED_DEFENSE // 2024</div>
         </div>
     </div>
 
@@ -241,9 +280,9 @@
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
-                statusEl.innerHTML = `TARGET ANALYZED <span class="skull-center">💀</span>`;
+                statusEl.innerHTML = `TARGET ANALYZED. VERIFYING CONNECTION <span class="skull-center">💀</span> ..: :..`;
                 ipEl.innerText = `[${data.ip}]`;
-            } catch (e) { statusEl.innerText = "STEALTH_PROTOCOL_ACTIVE"; }
+            } catch (e) { statusEl.innerText = "STEALTH_PROTOCOL_ACTIVE ..: :.."; }
         }
         interrogateIP();
     </script>

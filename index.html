@@ -9,12 +9,12 @@
 
         :root {
             --void: #010204;
-            --hull: rgba(10, 12, 16, 0.95);
-            --amber: #d4a373; /* Muted Bronze/Amber for humbler feel */
-            --cyan: #64d2ff;
-            --glass-border: rgba(212, 163, 115, 0.15);
-            --text-main: #d1d5db;
-            --text-dim: #6b7280;
+            --hull: rgba(10, 12, 16, 0.98);
+            --amber: #c5a07d; /* Muted Bronze */
+            --cyan: #5ec8ed;
+            --glass-border: rgba(197, 160, 125, 0.1);
+            --text-main: #cfd4da;
+            --text-dim: #636c76;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,15 +29,14 @@
 
         .mono { font-family: 'JetBrains Mono', monospace; }
 
-        /* --- SUBTLE BIOLOGY --- */
+        /* --- THE LOOP CORE --- */
         @keyframes rotate-subtle { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes breathe { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
         
         .hero-visual {
             position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 60px auto 30px;
+            width: 180px;
+            height: 180px;
+            margin: 50px auto 30px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -49,30 +48,28 @@
             border: 1px solid var(--glass-border);
             border-top: 1px solid var(--amber);
             border-radius: 50%;
-            animation: rotate-subtle 30s linear infinite;
+            animation: rotate-subtle 40s linear infinite;
         }
 
         .core-dna {
-            width: 120px; height: 120px;
+            width: 110px; height: 110px;
             border-radius: 50%;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            filter: grayscale(0.4) contrast(1.1);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            filter: grayscale(0.6) contrast(1.1);
         }
 
-        /* --- THE GRID --- */
+        /* --- GRID DESIGN --- */
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
         
         .panel {
             background: var(--hull);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 4px;
+            border-radius: 2px;
             padding: 25px;
             margin-bottom: 20px;
-            transition: border 0.3s;
         }
-        .panel:hover { border-color: rgba(212, 163, 115, 0.4); }
 
         .tag-sm {
             font-family: 'JetBrains Mono';
@@ -84,21 +81,20 @@
             margin-bottom: 12px;
         }
 
-        h1 { font-weight: 900; font-size: 2.2rem; letter-spacing: -0.5px; margin-bottom: 8px; color: #fff; }
-        .quote { font-size: 14px; color: var(--text-dim); font-style: italic; max-width: 600px; margin: 0 auto 40px; }
+        h1 { font-weight: 900; font-size: 2.1rem; letter-spacing: -0.5px; margin-bottom: 8px; color: #fff; }
+        .quote { font-size: 14px; color: var(--text-dim); font-style: italic; max-width: 600px; margin: 0 auto 40px; text-align: center; }
 
         .data-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
 
         .video-wrapper { 
-            width: 100%; border: 1px solid rgba(255,255,255,0.05); 
-            background: #000; border-radius: 2px; margin-top: 10px;
+            width: 100%; border: 1px solid rgba(255,255,255,0.03); 
+            background: #000; border-radius: 1px; margin-top: 10px;
         }
-        video { width: 100%; display: block; opacity: 0.8; }
+        video { width: 100%; display: block; opacity: 0.7; filter: saturate(0.8); }
 
-        /* --- MOBILE --- */
         @media (max-width: 768px) {
             .data-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 1.8rem; }
+            h1 { font-size: 1.7rem; }
         }
 
         .link-btn {
@@ -106,11 +102,11 @@
             color: var(--text-main); text-decoration: none; font-size: 10px;
             margin-right: 8px; margin-top: 10px; font-family: 'JetBrains Mono';
         }
-        .link-btn:hover { background: var(--amber); color: var(--void); }
+        .link-btn:hover { background: rgba(197, 160, 125, 0.1); border-color: var(--amber); }
 
         footer {
             margin-top: 40px; padding: 30px 0; border-top: 1px solid var(--glass-border);
-            display: flex; justify-content: space-between; font-size: 10px; 
+            display: flex; justify-content: space-between; font-size: 9px; 
             color: var(--text-dim); font-family: 'JetBrains Mono';
         }
     </style>
@@ -119,8 +115,8 @@
 
     <div class="container">
         <header style="padding: 15px 0; display: flex; justify-content: space-between; border-bottom: 1px solid var(--glass-border); margin-bottom: 40px;">
-            <div class="mono" style="font-size: 10px; color: var(--text-dim);">SYSTEM: ARCHITECTURE_LOGS</div>
-            <div class="mono" style="font-size: 10px; color: var(--amber);">[ STATE: ADAPTIVE_HANDSHAKE ]</div>
+            <div class="mono" style="font-size: 9px; color: var(--text-dim);">SYSTEM: ARCHITECTURE_LOGS</div>
+            <div class="mono" style="font-size: 9px; color: var(--amber);">[ STATE: ADAPTIVE_SYNC ]</div>
         </header>
 
         <section style="text-align: center;">
@@ -174,12 +170,13 @@
             </div>
 
             <div class="panel">
-                <span class="tag-sm">Validated Uplinks</span>
+                <span class="tag-sm">Foundation & Uplinks</span>
                 <div class="mono">
                     <a href="https://www.credly.com/users/kwasi-kontor/badges" target="_blank" class="link-btn">CREDLY_MANIFEST</a>
                     <a href="https://github.com/kwasikontor45" target="_blank" class="link-btn">GITHUB_SRC</a>
-                    <p style="font-size: 9px; margin-top: 15px; color: var(--text-dim);">
-                        ◈ GUARD CARD // CA_VALIDATED<br>◈ COMPTIA // STACKED
+                    <p style="font-size: 10px; margin-top: 15px; color: var(--text-dim);">
+                        ◈ GUARD CARD // CA_VALIDATED<br>
+                        ◈ LEGACY COMPTIA // '14 CORE FOUNDATION
                     </p>
                 </div>
             </div>
@@ -194,7 +191,7 @@
 
         <footer>
             <div id="radar-output">INITIATING WELCOME PROTOCOL...</div>
-            <div class="mono">AMOR FATI // ☠️ // 2017-2022</div>
+            <div>AMOR FATI // ☠️ // 2017-2022</div>
         </footer>
     </div>
 
@@ -204,7 +201,7 @@
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
-                radar.innerHTML = `WELCOME, HONORED GUEST. LOCAL_RADAR: [${data.ip}] <span style="animation: breathe 2s infinite">💀</span>`;
+                radar.innerHTML = `WELCOME, HONORED GUEST. LOCAL_RADAR: [${data.ip}]`;
             } catch (e) {
                 radar.innerText = "RADAR_STEALTH_ACTIVE";
             }

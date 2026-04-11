@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K. KONTOR // AMOR FATI</title>
+    <title>K. KONTOR // STREET-OPS</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Outfit:wght@300;600;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Orbitron:wght@400;900&display=swap');
 
         :root {
-            --void: #020305;
-            --hull: rgba(10, 12, 16, 0.98);
-            --amber: #a68a6d; 
-            --cyan: #4a9ebf;
-            --crimson: #8b2626;
-            --glass-border: rgba(166, 138, 109, 0.12);
-            --text-main: #9ca3af;
-            --text-dim: #4b5563;
+            --void: #020205;
+            --hull: rgba(12, 14, 20, 0.95);
+            --neon-amber: #ffae00;
+            --cyber-red: #ff003c;
+            --cyber-blue: #00f2ff;
+            --glass-border: rgba(255, 174, 0, 0.15);
+            --text-main: #a9b1d6;
+            --text-dim: #565f89;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,254 +23,211 @@
         body {
             background: var(--void);
             color: var(--text-main);
-            font-family: 'Outfit', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 50%, #0d1117 0%, #020305 100%);
+            background-image: 
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
         }
-
-        .mono { font-family: 'JetBrains Mono', monospace; }
 
         /* --- ANIMATIONS --- */
-        @keyframes skull-flicker {
-            0%, 100% { opacity: 1; filter: drop-shadow(0 0 2px var(--crimson)); }
-            50% { opacity: 0.4; transform: scale(1.05) translate(1px, -1px); filter: hue-rotate(90deg); }
+        @keyframes pulse-underscore { 
+            0%, 100% { opacity: 1; } 50% { opacity: 0; } 
         }
 
-        @keyframes sync-breathe {
-            0%, 100% { opacity: 0.3; box-shadow: 0 0 0px var(--cyan); }
-            50% { opacity: 1; box-shadow: 0 0 10px var(--cyan); }
+        @keyframes glitch-skull {
+            0% { transform: translate(0); text-shadow: none; }
+            20% { transform: translate(-2px, 2px); text-shadow: 2px 0 var(--cyber-red); }
+            40% { transform: translate(-2px, -2px); text-shadow: -2px 0 var(--cyber-blue); }
+            60% { transform: translate(2px, 2px); }
+            100% { transform: translate(0); }
         }
 
-        @keyframes rotate-loop { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        @keyframes radar-pulse {
-            0% { border: 1px solid var(--glass-border); }
-            50% { border: 1px solid var(--amber); }
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
 
         /* --- LAYOUT --- */
         .container { 
             width: 100%;
             max-width: 800px; 
-            padding: 40px 20px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
         }
 
         .panel {
             background: var(--hull);
             border: 1px solid var(--glass-border);
-            border-radius: 4px;
-            padding: 30px;
             position: relative;
-            text-align: center;
+            padding: 25px;
+            overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .panel::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--neon-amber); opacity: 0.1; animation: scanline 6s linear infinite;
         }
 
         /* --- COMPONENTS --- */
-        .sync-light {
-            display: inline-block;
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--cyan);
-            margin-right: 10px;
-            animation: sync-breathe 3s infinite;
-        }
-
-        .skull-anim {
-            display: inline-block;
-            animation: skull-flicker 0.2s infinite;
-            color: var(--crimson);
-            font-style: normal;
-        }
-
-        .ouroboros-visual {
-            position: relative;
-            width: 160px; height: 160px;
-            margin: 0 auto 25px;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        .loop {
-            position: absolute;
-            width: 100%; height: 100%;
-            border: 1px solid var(--glass-border);
-            border-top: 1px solid var(--amber);
-            border-radius: 50%;
-            animation: rotate-loop 40s linear infinite;
-        }
-
-        .butterfly {
-            width: 100px; height: 100px;
-            border-radius: 50%;
-            overflow: hidden;
-            filter: grayscale(1) opacity(0.6);
-        }
-
-        .tag-sm {
-            font-family: 'JetBrains Mono';
-            font-size: 9px;
-            color: var(--amber);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        h1 { font-weight: 600; font-size: 2rem; color: #fff; margin-bottom: 5px; }
+        .underscore { animation: pulse-underscore 0.8s infinite; color: var(--neon-amber); }
         
-        .data-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-
-        .video-box { width: 100%; background: #000; border: 1px solid var(--glass-border); margin-top: 15px; overflow: hidden; }
-        video { width: 100%; opacity: 0.5; filter: contrast(1.1); transition: 0.5s; }
-        video:hover { opacity: 0.9; }
-
-        .link-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 1px solid var(--glass-border);
-            color: var(--text-main);
-            text-decoration: none;
-            font-family: 'JetBrains Mono';
-            font-size: 10px;
-            margin: 5px;
-            transition: 0.3s;
+        .skull-glitch { 
+            display: inline-block; 
+            animation: glitch-skull 3s infinite; 
+            color: var(--cyber-red); 
+            font-weight: bold;
         }
-        .link-btn:hover { border-color: var(--amber); color: var(--amber); }
 
-        @media (max-width: 768px) {
-            .data-grid { grid-template-columns: 1fr; }
-            .container { padding: 20px 15px; }
+        .header-ui { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 5px; }
+
+        h1 { 
+            font-family: 'Orbitron', sans-serif; 
+            font-weight: 900; font-size: 2rem; 
+            letter-spacing: 4px; color: #fff; 
+            text-transform: uppercase;
+            text-shadow: 2px 2px var(--void), 0 0 10px rgba(255,255,255,0.2);
         }
+
+        .tag-amber { color: var(--neon-amber); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; }
+
+        .data-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+        .video-den { width: 100%; border-top: 2px solid var(--glass-border); background: #000; margin-top: 10px; }
+        video { width: 100%; opacity: 0.6; filter: contrast(1.2) brightness(0.8); }
+
+        .btn {
+            display: inline-block; padding: 5px 10px; border: 1px solid var(--neon-amber);
+            color: var(--neon-amber); text-decoration: none; font-size: 10px; margin: 5px 5px 0 0;
+            background: rgba(255, 174, 0, 0.05);
+        }
+        .btn:hover { background: var(--neon-amber); color: var(--void); }
+
+        @media (max-width: 768px) { .data-grid { grid-template-columns: 1fr; } }
 
         footer {
-            margin-top: 30px;
-            border-top: 1px solid var(--glass-border);
-            padding-top: 20px;
-            text-align: center;
-            font-family: 'JetBrains Mono';
-            font-size: 9px;
-            color: var(--text-dim);
+            margin-top: 20px; border-top: 1px solid var(--glass-border);
+            padding-top: 15px; text-align: center; font-size: 10px; color: var(--text-dim);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;" class="mono">
-            <div style="font-size: 9px; opacity: 0.6;">SYSTEM: ARCHITECTURE_LOGS    >_</div>
-            <div style="font-size: 9px; color: var(--cyan);">
-                <span class="sync-light"></span>[ STATE: ADAPTIVE_SYNC ]
-            </div>
+        <div class="header-ui">
+            <div>SYSTEM: ARCHITECTURE_LOGS <span class="underscore">_</span></div>
+            <div style="color: var(--cyber-blue);">[ STATE: ADAPTIVE_SYNC ]</div>
         </div>
 
-        <section class="panel">
-            <div class="ouroboros-visual">
-                <div class="loop"></div>
-                <div class="butterfly">
-                    <img src="butterfly-dna.gif" style="width:100%; height:100%; object-fit:cover;">
-                </div>
+        <section class="panel" style="text-align: center;">
+            <div style="margin-bottom: 15px; opacity: 0.5;">
+                <img src="butterfly-dna.gif" style="width: 80px; height: 80px; border-radius: 50%; border: 1px solid var(--cyber-blue);">
             </div>
-            <h1>Kwasi M. Kontor</h1>
-            <p style="font-size: 13px; color: var(--text-dim); font-style: italic; margin-top: 10px;">
+            <h1>KWASI M. KONTOR</h1>
+            <p style="font-size: 12px; color: var(--text-dim); margin-top: 10px;">
                 "Amor Fati: Life rewritten by choice, sharpened through endless cycles."
             </p>
         </section>
 
-        <div class="panel" style="text-align: left;">
-            <span class="tag-sm">Primary Designation</span>
-            <p style="font-size: 15px; color: #d1d5db;">
-                <strong>USN 2017-2022 Shellback</strong> <span class="skull-anim">☠️</span> <br>
-                Architecture enthusiast. Focused on context-aware strategies and practical defensive measures within SOC environments through hands-on labs and active research.
+        <div class="panel">
+            <span class="tag-amber">Primary Designation</span>
+            <p style="font-size: 14px; margin-top: 5px; line-height: 1.6;">
+                <strong>USN 2017-2022 Shellback</strong> <span class="skull-glitch">☠️</span> <br>
+                Architecture enthusiast. Focused on context-aware strategies and practical defensive measures within SOC environments.
             </p>
         </div>
 
         <div class="data-grid">
-            <div class="panel" style="text-align: left;">
-                <span class="tag-sm">Telemetry</span>
-                <div class="mono" style="font-size: 10px; line-height: 2;">
-                    SECTOR: <span style="color:var(--amber)">LOST & FOUND // LA-CA-1722</span><br>
-                    SIGNAL: <span style="color:var(--amber)">DnA_Sync_SUCCESS</span><br>
-                    LOG: <span style="color:var(--amber)">CONTINUOUS_ITERATION</span>
+            <div class="panel">
+                <span class="tag-amber">Telemetry</span>
+                <div style="font-size: 10px; line-height: 1.8; margin-top: 8px;">
+                    SECTOR: <span style="color:#fff">LOST & FOUND // LA-CA-1722</span><br>
+                    SIGNAL: <span style="color:var(--cyber-blue)">DnA_Sync_SUCCESS</span><br>
+                    LOG: <span style="color:var(--cyber-blue)">CONTINUOUS_ITERATION</span>
                 </div>
             </div>
 
-            <div class="panel" style="text-align: left;">
-                <span class="tag-sm">The Philosophy</span>
-                <p style="font-size: 12px; color: var(--text-dim);">The snake loops; the butterfly is what the loop is for. Each cycle is a choice to endure and sharpen the wings.</p>
+            <div class="panel">
+                <span class="tag-amber">The Philosophy</span>
+                <p style="font-size: 11px; color: var(--text-dim); margin-top: 8px;">
+                    The snake loops; the butterfly is what the loop is for. Each cycle is a choice to sharpen the wings.
+                </p>
             </div>
 
-            <div class="panel" style="grid-column: span 12; padding: 0; overflow: hidden; text-align: left;">
-                <div style="padding: 30px;">
-                    <span class="tag-sm">Active Lab // KATALEYA</span>
-                    <h3 style="color:#fff; margin-bottom: 5px;">Privacy-First Recovery Sanctuary</h3>
-                    <p style="font-size: 13px; color: var(--text-dim);">An exercise in protecting human fragility through technical mastery. Built with X25519 encryption and circadian-rhythm UI.</p>
+            <div class="panel" style="grid-column: span 12; padding: 0;">
+                <div style="padding: 20px;">
+                    <span class="tag-amber">Active Lab // KATALEYA</span>
+                    <p style="font-size: 12px; margin-top: 5px;">Built with X25519 encryption and circadian-rhythm UI. Protecting human fragility through technical mastery.</p>
                 </div>
-                <div class="video-box">
+                <div class="video-den">
                     <video autoplay muted loop playsinline controls><source src="katas.mp4" type="video/mp4"></video>
                 </div>
             </div>
 
-            <div class="panel" style="text-align: left;">
-                <span class="tag-sm">Foundation & Uplinks</span>
-                <div class="mono">
-                    <a href="https://www.credly.com/users/kwasi-kontor/badges" target="_blank" class="link-btn">CREDLY_MANIFEST</a>
-                    <a href="https://github.com/kwasikontor45" target="_blank" class="link-btn">GITHUB_SRC</a>
-                    <div style="font-size: 9px; margin-top: 15px; color: var(--text-dim); line-height: 1.8;">
+            <div class="panel">
+                <span class="tag-amber">Foundation // Uplinks</span>
+                <div style="margin-top: 10px;">
+                    <a href="https://www.credly.com/users/kwasi-kontor/badges" target="_blank" class="btn">CREDLY_MANIFEST</a>
+                    <a href="https://github.com/kwasikontor45" target="_blank" class="btn">GITHUB_SRC</a>
+                    <div style="font-size: 9px; color: var(--text-dim); margin-top: 12px; line-height: 1.5;">
                         ◈ GUARD CARD //..: 6877683 :..// CA_VALIDATED<br>
                         ◈ LEGACY COMPTIA // '14 CORE FOUNDATION
                     </div>
                 </div>
             </div>
 
-            <div class="panel" style="text-align: left;">
-                <span class="tag-sm">Signal Channel</span>
-                <div class="mono" style="font-size: 11px;">
-                    [MAIL]: <a href="mailto:stormdesk57@gmail.com" style="color:var(--amber); text-decoration:none;">stormdesk57@gmail.com</a>
+            <div class="panel">
+                <span class="tag-amber">Signal Channel</span>
+                <div style="font-size: 11px; margin-top: 10px;">
+                    [MAIL]: <a href="mailto:stormdesk57@gmail.com" style="color:var(--neon-amber); text-decoration:none;">stormdesk57@gmail.com</a>
                 </div>
-                <div style="margin-top: 20px; font-size: 10px; color: var(--text-dim); font-style: italic;">
+                <div style="margin-top: 15px; font-size: 9px; color: var(--text-dim); font-style: italic;">
                     "Some things don't need to be tracked to be understood."
                 </div>
             </div>
         </div>
 
         <footer>
-            <div id="radar-output" class="mono" style="margin-bottom: 10px; color: var(--amber);">
-                SCANNING HORIZON...
+            <div id="radar-output" style="color: var(--neon-amber); font-weight: bold; margin-bottom: 5px;">
+                RADAR_ID: [ SEARCHING... ]
             </div>
-            <div class="mono">
-                E Pluribus Unum ..: <span class="skull-anim">☠️</span> :.. In God We Trust
+            <div style="letter-spacing: 1px; opacity: 0.7;">
+                E Pluribus Unum ..: <span class="skull-glitch">☠️</span> :.. In God We Trust
             </div>
         </footer>
     </div>
 
     <script>
-        async function engageRadar() {
+        async function runRadar() {
             const radar = document.getElementById('radar-output');
+            let ip = "47.147.242.86";
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
-                
-                // Animation loop for detection
-                let count = 0;
-                const interval = setInterval(() => {
-                    count++;
-                    radar.innerHTML = `LOCAL_RADAR: [SEARCHING${'.'.repeat(count % 4)}]`;
-                    if (count > 6) {
-                        clearInterval(interval);
-                        radar.innerHTML = `WELCOME, HONORED GUEST. LOCAL_RADAR: [${data.ip}]`;
-                    }
-                }, 400);
+                ip = data.ip;
+            } catch (e) {}
 
-            } catch (e) {
-                radar.innerText = "RADAR_STEALTH_ACTIVE";
-            }
+            const states = [
+                `WELCOME_GUEST. RADAR_ID: [ ${ip} ]`,
+                `UPLINK_ESTABLISHED. RADAR_ID: [ ${ip} ]`,
+                `SCANNING_SECTOR. RADAR_ID: [ ${ip} ]`,
+                `HONORED_GUEST_DETECTED. RADAR_ID: [ ${ip} ]`
+            ];
+            
+            let i = 0;
+            setInterval(() => {
+                radar.innerHTML = states[i];
+                i = (i + 1) % states.length;
+            }, 3000); // Cycles every 3 seconds
         }
-        engageRadar();
+        runRadar();
     </script>
 </body>
 </html>
